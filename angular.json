@@ -103,9 +103,21 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "avans-adweb"
+  "defaultProject": "avans-adweb",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
