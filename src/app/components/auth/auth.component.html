@@ -1,0 +1,2 @@
+<button type="button" *ngIf="user == null" (click)="authService.login()">Login</button>
+<button type="button" *ngIf="user != null" (click)="authService.logout()">Logout</button>
