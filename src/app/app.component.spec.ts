@@ -20,9 +20,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'Huishoudboekje'`, () => {
+  it(`should have as title 'Checkbook'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('Huishoudboekje');
+    expect(app.title).toEqual('Checkbook');
   });
 });
