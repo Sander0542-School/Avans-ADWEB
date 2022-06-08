@@ -19,7 +19,6 @@ export class AuthComponent implements OnInit {
   user: any = null;
 
   ngOnInit(): void {
-
   }
 
 }
