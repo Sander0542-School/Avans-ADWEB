@@ -12,11 +12,16 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { AuthComponent } from './components/auth/auth.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatButtonModule} from "@angular/material/button";
+import {MatMenuModule} from "@angular/material/menu";
+import { NavbarComponent } from './layouts/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthComponent
+    AuthComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +32,10 @@ import { AuthComponent } from './components/auth/auth.component';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     providePerformance(() => getPerformance()),
-    provideRemoteConfig(() => getRemoteConfig())
+    provideRemoteConfig(() => getRemoteConfig()),
+    MatToolbarModule,
+    MatButtonModule,
+    MatMenuModule
   ],
   providers: [
     ScreenTrackingService,UserTrackingService

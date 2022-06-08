@@ -1,2 +1,7 @@
-<button type="button" *ngIf="user == null" (click)="authService.login()">Login</button>
-<button type="button" *ngIf="user != null" (click)="authService.logout()">Logout</button>
+<button *ngIf="user == null" mat-button (click)="authService.login()">Login</button>
+<div *ngIf="user != null">
+  <button mat-button [mat-menu-trigger-for]="userMenu">{{user.displayName}}</button>
+  <mat-menu #userMenu="matMenu">
+    <button mat-menu-item (click)="authService.logout()">Logout</button>
+  </mat-menu>
+</div>

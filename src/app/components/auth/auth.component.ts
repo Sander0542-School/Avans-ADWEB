@@ -9,7 +9,7 @@ import {AuthService} from "../../services/auth.service";
 export class AuthComponent implements OnInit {
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
   ) {
     this.authService.authState.subscribe(user => {
       this.user = user;
