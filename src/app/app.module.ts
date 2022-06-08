@@ -15,13 +15,16 @@ import { AuthComponent } from './components/auth/auth.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
 import {MatMenuModule} from "@angular/material/menu";
-import { NavbarComponent } from './layouts/navbar/navbar.component';
+import { NavigationComponent } from './layouts/navigation/navigation.component';
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatIconModule} from "@angular/material/icon";
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
-    NavbarComponent
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,10 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
     provideRemoteConfig(() => getRemoteConfig()),
     MatToolbarModule,
     MatButtonModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
   ],
   providers: [
     ScreenTrackingService,UserTrackingService
