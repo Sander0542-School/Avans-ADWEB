@@ -19,6 +19,10 @@ export class AuthService {
     });
   }
 
+  get currentUser() {
+    return this.afAuth.currentUser;
+  }
+
   get authState() {
     return authState(this.afAuth);
   }
