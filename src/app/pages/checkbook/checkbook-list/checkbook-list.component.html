@@ -1,3 +1,5 @@
+<button mat-button (click)="open()">Add checkbook</button>
+
 <table mat-table [dataSource]="checkbooks" class="mat-elevation-z8">
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>
@@ -23,3 +25,4 @@
     <td class="mat-cell" colspan="4">No checkbooks found</td>
   </tr>
 </table>
+

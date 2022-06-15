@@ -1,6 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Checkbook} from "../../../models/checkbook";
 import {CheckbookService} from "../../../services/checkbook.service";
+import {MatDialog} from '@angular/material/dialog';
+import {CheckbookCreateComponent} from "../checkbook-create/checkbook-create.component";
 
 @Component({
   selector: 'app-checkbook-list',
@@ -12,10 +14,15 @@ export class CheckbookListComponent implements OnInit {
 
   private documents: Checkbook[] = [];
 
+  @ViewChild('modalContent')
+  modalContent: ElementRef | undefined;
+
   constructor(
-    private checkbooksService: CheckbookService
-  ) {
-  }
+    public dialog: MatDialog,
+    private checkbooksService: CheckbookService,
+
+  )
+   {}
 
   ngOnInit(): void {
     this.checkbooksService.getCheckbooks(snapshot => {
@@ -29,6 +36,10 @@ export class CheckbookListComponent implements OnInit {
 
   get checkbooks() {
     return this.documents;
+  }
+
+  open() {
+    this.dialog.open(CheckbookCreateComponent);
   }
 
 }

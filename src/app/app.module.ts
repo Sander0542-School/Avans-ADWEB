@@ -23,6 +23,12 @@ import {CheckbookListComponent} from './pages/checkbook/checkbook-list/checkbook
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {CheckbookComponent} from './pages/checkbook/checkbook/checkbook.component';
+import { CheckbookCreateComponent } from './pages/checkbook/checkbook-create/checkbook-create.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatSelectModule} from "@angular/material/select";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
   declarations: [
@@ -30,7 +36,8 @@ import {CheckbookComponent} from './pages/checkbook/checkbook/checkbook.componen
     NavigationComponent,
     HomeComponent,
     CheckbookListComponent,
-    CheckbookComponent
+    CheckbookComponent,
+    CheckbookCreateComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +56,13 @@ import {CheckbookComponent} from './pages/checkbook/checkbook/checkbook.componen
     MatIconModule,
     MatListModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    FormsModule,
+    MatInputModule,
+    ReactiveFormsModule,
   ],
   providers: [
     ScreenTrackingService, UserTrackingService
