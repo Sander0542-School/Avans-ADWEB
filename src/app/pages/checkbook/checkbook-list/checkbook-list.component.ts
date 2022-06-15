@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Checkbook} from "../../../models/checkbook";
 import {CheckbookService} from "../../../services/checkbook.service";
+import {where} from "@angular/fire/firestore";
 
 @Component({
   selector: 'app-checkbook-list',
@@ -24,11 +25,14 @@ export class CheckbookListComponent implements OnInit {
         checkbook.id = doc.id;
         return checkbook
       });
-    })
+    }, where('archived', '==', false));
   }
 
   get checkbooks() {
     return this.documents;
   }
 
+  async archiveCheckbook(checkbookId: string) {
+    await this.checkbooksService.updateCheckbook(checkbookId, {archived: true});
+  }
 }
