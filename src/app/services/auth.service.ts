@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Auth, AuthProvider, authState, GoogleAuthProvider, signInWithPopup, signOut} from "@angular/fire/auth";
-import {skip} from "rxjs";
+import {UserService} from "./user.service";
 
 @Injectable({
   providedIn: 'root'
@@ -8,14 +8,12 @@ import {skip} from "rxjs";
 export class AuthService {
 
   constructor(
-    private afAuth: Auth
+    private afAuth: Auth,
+    private userService: UserService
   ) {
-    this.authState.pipe(skip(1)).subscribe(user => {
-      if (user) {
-        console.log('User logged in: ', user.uid);
-      } else {
-        console.log('User logged out');
-      }
+    this.authState.pipe().subscribe(async user => {
+      if (user == null) return;
+      await this.userService.updateUser(user);
     });
   }
 
