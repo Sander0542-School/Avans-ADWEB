@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -24,6 +24,8 @@ import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {CheckbookComponent} from './pages/checkbook/checkbook/checkbook.component';
 import {CheckbookArchivedComponent} from './pages/checkbook/checkbook-archived/checkbook-archived.component';
+
+import '@angular/common/locales/global/nl';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import {CheckbookArchivedComponent} from './pages/checkbook/checkbook-archived/c
     MatSortModule
   ],
   providers: [
-    ScreenTrackingService, UserTrackingService
+    ScreenTrackingService,
+    UserTrackingService,
+    {provide: LOCALE_ID, useValue: 'nl-NL'},
   ],
   bootstrap: [AppComponent]
 })
