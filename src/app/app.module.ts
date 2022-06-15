@@ -23,6 +23,7 @@ import {CheckbookListComponent} from './pages/checkbook/checkbook-list/checkbook
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {CheckbookComponent} from './pages/checkbook/checkbook/checkbook.component';
+import {CheckbookArchivedComponent} from './pages/checkbook/checkbook-archived/checkbook-archived.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {CheckbookComponent} from './pages/checkbook/checkbook/checkbook.componen
     NavigationComponent,
     HomeComponent,
     CheckbookListComponent,
-    CheckbookComponent
+    CheckbookComponent,
+    CheckbookArchivedComponent,
   ],
   imports: [
     BrowserModule,

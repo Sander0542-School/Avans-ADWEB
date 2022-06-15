@@ -4,11 +4,11 @@ import {CheckbookService} from "../../../services/checkbook.service";
 import {where} from "@angular/fire/firestore";
 
 @Component({
-  selector: 'app-checkbook-list',
-  templateUrl: './checkbook-list.component.html',
-  styleUrls: ['./checkbook-list.component.scss']
+  selector: 'app-checkbook-archived',
+  templateUrl: './checkbook-archived.component.html',
+  styleUrls: ['./checkbook-archived.component.scss']
 })
-export class CheckbookListComponent implements OnInit {
+export class CheckbookArchivedComponent implements OnInit {
   displayedColumns: string[] = ['name', 'description', 'actions'];
 
   private documents: Checkbook[] = [];
@@ -25,14 +25,14 @@ export class CheckbookListComponent implements OnInit {
         checkbook.id = doc.id;
         return checkbook
       });
-    }, where('archived', '==', false));
+    }, where('archived', '==', true));
   }
 
   get checkbooks() {
     return this.documents;
   }
 
-  async archiveCheckbook(checkbookId: string) {
-    await this.checkbooksService.updateCheckbook(checkbookId, {archived: true});
+  async restoreCheckbook(checkbookId: string) {
+    await this.checkbooksService.updateCheckbook(checkbookId, {archived: false});
   }
 }
