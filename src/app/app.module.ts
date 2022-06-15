@@ -29,6 +29,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
+import {CheckbookArchivedComponent} from './pages/checkbook/checkbook-archived/checkbook-archived.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {MatInputModule} from "@angular/material/input";
     HomeComponent,
     CheckbookListComponent,
     CheckbookComponent,
+    CheckbookArchivedComponent,
     CheckbookCreateComponent
   ],
   imports: [

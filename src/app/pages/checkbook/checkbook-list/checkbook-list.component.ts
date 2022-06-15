@@ -3,6 +3,7 @@ import {Checkbook} from "../../../models/checkbook";
 import {CheckbookService} from "../../../services/checkbook.service";
 import {MatDialog} from '@angular/material/dialog';
 import {CheckbookCreateComponent} from "../checkbook-create/checkbook-create.component";
+import {where} from "@angular/fire/firestore";
 
 @Component({
   selector: 'app-checkbook-list',
@@ -20,9 +21,8 @@ export class CheckbookListComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private checkbooksService: CheckbookService,
-
-  )
-   {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.checkbooksService.getCheckbooks(snapshot => {
@@ -31,7 +31,7 @@ export class CheckbookListComponent implements OnInit {
         checkbook.id = doc.id;
         return checkbook
       });
-    })
+    }, where('archived', '==', false));
   }
 
   get checkbooks() {
@@ -42,4 +42,7 @@ export class CheckbookListComponent implements OnInit {
     this.dialog.open(CheckbookCreateComponent);
   }
 
+  async archiveCheckbook(checkbookId: string) {
+    await this.checkbooksService.updateCheckbook(checkbookId, {archived: true});
+  }
 }
