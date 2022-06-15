@@ -10,7 +10,8 @@ import {
   collection,
   where,
   updateDoc,
-  doc
+  doc,
+  docSnapshots
 } from "@angular/fire/firestore";
 import {Checkbook} from "../models/checkbook";
 
@@ -29,6 +30,10 @@ export class CheckbookService {
 
   getCheckbooks(callback: (snapshot: QuerySnapshot<Checkbook>) => void, ...queryConstrains: QueryConstraint[]) {
     onSnapshot(query(this.collection, where('users', 'array-contains', this.authService.currentUser?.uid), ...queryConstrains), callback);
+  }
+
+  async getCheckbook(checkbookId: string) {
+    return docSnapshots(doc(this.collection, checkbookId));
   }
 
   async updateCheckbook(checkbookId: string, data: Partial<Checkbook>) {
