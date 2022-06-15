@@ -20,15 +20,14 @@ export class CheckbookEditComponent implements OnInit {
     private checkbooksService: CheckbookService,
     private formBuilder: FormBuilder,
     private authService: AuthService,
-  )
-   {
-     this.editPageForm = this.formBuilder.group({
-       name: ['', Validators.required],
-       description: ['', Validators.required]
-     });
-     this.editPageForm.patchValue(this.checkBookData);
+  ) {
+    this.editPageForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required]
+    });
+    this.editPageForm.patchValue(this.checkBookData);
 
-   }
+  }
 
   ngOnInit(): void {
 
@@ -40,7 +39,7 @@ export class CheckbookEditComponent implements OnInit {
     this.checkBookData.name = this.editPageForm.value.name;
     this.checkBookData.description = this.editPageForm.value.description;
 
-    if(this.checkBookData.ownerId !== this.authService.currentUser?.uid) return;
+    if (this.checkBookData.ownerId !== this.authService.currentUser?.uid) return;
     this.checkbooksService.updateCheckbook(this.checkBookData.id, this.checkBookData).then(r => this.dialogRef.close());
   }
 
