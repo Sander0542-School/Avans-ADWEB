@@ -7,7 +7,8 @@ import {
   onSnapshot,
   query,
   collection,
-  where
+  where,
+  addDoc
 } from "@angular/fire/firestore";
 import {Checkbook} from "../models/checkbook";
 
@@ -26,6 +27,10 @@ export class CheckbookService {
 
   getCheckbooks(callback: (snapshot: QuerySnapshot<Checkbook>) => void) {
     onSnapshot(query(this.collection, where('users', 'array-contains', this.authService.currentUser?.uid)), callback);
+  }
+
+  async addCheckbook(checkbook: Checkbook) {
+    return await addDoc(this.collection, checkbook);
   }
 }
 
