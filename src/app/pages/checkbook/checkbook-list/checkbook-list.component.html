@@ -16,7 +16,7 @@
     <td mat-cell *matCellDef="let checkbook">
       <a mat-raised-button color="primary" routerLink="/checkbooks/{{checkbook.id}}">View</a>
       <button mat-raised-button color="primary" (click)="archiveCheckbook(checkbook.id)">Archive</button>
-      <button *ngIf="(user$ | async)?.uid == checkbook.ownerId" mat-raised-button color="primary" (click)="openEditDialog(checkbook)">Edit</button>
+      <button *ngIf="(user$ | async)?.uid === checkbook.ownerId" mat-raised-button color="primary" (click)="openEditDialog(checkbook)">Edit</button>
     </td>
   </ng-container>
 
