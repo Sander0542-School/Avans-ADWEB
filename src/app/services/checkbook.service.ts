@@ -11,9 +11,10 @@ import {
   where,
   updateDoc,
   doc,
-  docSnapshots
+  docSnapshots,
 } from "@angular/fire/firestore";
 import {Checkbook} from "../models/checkbook";
+import {Transaction} from "../models/transaction";
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,12 @@ export class CheckbookService {
 
   async getCheckbook(checkbookId: string) {
     return docSnapshots(doc(this.collection, checkbookId));
+  }
+
+  getTransactions(checkbookId: string, callback: (snapshot: QuerySnapshot<Transaction>) => void, ...queryConstrains: QueryConstraint[]) {
+    const subCollection = collection(this.firestore, `checkbooks`, checkbookId, 'transactions') as CollectionReference<Transaction>;
+
+    return onSnapshot(query(subCollection, ...queryConstrains), callback);
   }
 
   async updateCheckbook(checkbookId: string, data: Partial<Checkbook>) {
