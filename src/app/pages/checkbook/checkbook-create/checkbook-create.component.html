@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Create new checkbook</h1>
+<form [formGroup]="editPageForm" (ngSubmit)="save()" *ngIf="!pending">
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input matInput type="text" placeholder="Name" formControlName="name">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <input matInput type="text" placeholder="Description" formControlName="description">
+  </mat-form-field>
+
+  <button class="button">Save</button>
+</form>

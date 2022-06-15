@@ -9,6 +9,7 @@ import {
   query,
   collection,
   where,
+  addDoc,
   updateDoc,
   doc
 } from "@angular/fire/firestore";
@@ -33,6 +34,10 @@ export class CheckbookService {
 
   async updateCheckbook(checkbookId: string, data: Partial<Checkbook>) {
     return await updateDoc(doc(this.collection, checkbookId), data);
+  }
+
+  async addCheckbook(checkbook: Checkbook) {
+    return await addDoc(this.collection, checkbook);
   }
 }
 
