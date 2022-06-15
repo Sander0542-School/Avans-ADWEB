@@ -39,10 +39,9 @@ export class CheckbookCreateComponent implements OnInit {
       name: this.editPageForm.value.name,
       description: this.editPageForm.value.description,
       users: [this.authService.currentUser?.uid],
+      archived: false,
     } as Checkbook;
 
-
-    console.log(this.editPageForm.value);
     this.checkbooksService.addCheckbook(checkbook).then(r => this.dialogRef.close());
   }
 

@@ -4,6 +4,8 @@ import {CheckbookService} from "../../../services/checkbook.service";
 import {MatDialog} from '@angular/material/dialog';
 import {CheckbookCreateComponent} from "../checkbook-create/checkbook-create.component";
 import {where} from "@angular/fire/firestore";
+import {CheckbookEditComponent} from "../checkbook-edit/checkbook-edit.component";
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
   selector: 'app-checkbook-list',
@@ -13,6 +15,8 @@ import {where} from "@angular/fire/firestore";
 export class CheckbookListComponent implements OnInit {
   displayedColumns: string[] = ['name', 'description', 'actions'];
 
+  readonly user$ = this.authService.authState;
+
   private documents: Checkbook[] = [];
 
   @ViewChild('modalContent')
@@ -21,6 +25,7 @@ export class CheckbookListComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private checkbooksService: CheckbookService,
+    private authService: AuthService,
   ) {
   }
 
@@ -40,6 +45,12 @@ export class CheckbookListComponent implements OnInit {
 
   open() {
     this.dialog.open(CheckbookCreateComponent);
+  }
+
+  openEditDialog(checkbook: string) {
+    const dialogRef = this.dialog.open(CheckbookEditComponent, {
+      data: checkbook,
+    });
   }
 
   async archiveCheckbook(checkbookId: string) {

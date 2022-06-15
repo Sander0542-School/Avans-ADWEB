@@ -30,6 +30,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {CheckbookArchivedComponent} from './pages/checkbook/checkbook-archived/checkbook-archived.component';
+import { CheckbookEditComponent } from './pages/checkbook/checkbook-edit/checkbook-edit.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {CheckbookArchivedComponent} from './pages/checkbook/checkbook-archived/c
     CheckbookListComponent,
     CheckbookComponent,
     CheckbookArchivedComponent,
-    CheckbookCreateComponent
+    CheckbookCreateComponent,
+    CheckbookEditComponent
   ],
   imports: [
     BrowserModule,
