@@ -18,11 +18,19 @@ import {NavigationComponent} from './layouts/navigation/navigation.component';
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatIconModule} from "@angular/material/icon";
 import {MatListModule} from "@angular/material/list";
+import {HomeComponent} from './pages/home/home.component';
+import {CheckbookListComponent} from './pages/checkbook/checkbook-list/checkbook-list.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatSortModule} from "@angular/material/sort";
+import {CheckbookComponent} from './pages/checkbook/checkbook/checkbook.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent
+    NavigationComponent,
+    HomeComponent,
+    CheckbookListComponent,
+    CheckbookComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +47,9 @@ import {MatListModule} from "@angular/material/list";
     MatMenuModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatTableModule,
+    MatSortModule
   ],
   providers: [
     ScreenTrackingService, UserTrackingService
