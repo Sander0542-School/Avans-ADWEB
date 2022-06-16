@@ -5,6 +5,8 @@ import {CategoryService} from "../../../../services/category.service";
 import {Category} from "../../../../models/category";
 import {MatDialog} from "@angular/material/dialog";
 import {CategoryDialogComponent} from "../../categories/dialogs/category-dialog/category-dialog.component";
+import {Transaction} from "../../../../models/transaction";
+import {TableAction} from "../../categories/category-list/category-list.component";
 
 @Component({
   selector: 'app-categories',
@@ -19,6 +21,17 @@ export class CategoriesComponent implements OnChanges {
   public categories: Category[] = [];
 
   private categoryUnsubscribe: Unsubscribe | undefined;
+
+  public listActions: TableAction[] = [
+    {
+      name: 'Edit',
+      action: (category: Category) => this.openCategoryDialog(category),
+    },
+    {
+      name: 'Delete',
+      action: (category: Category) => this.deleteCategory(category),
+    }
+  ]
 
   constructor(
     public dialog: MatDialog,

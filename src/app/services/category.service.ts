@@ -35,7 +35,7 @@ export class CategoryService {
     return await addDoc(collection(this.firestore, 'checkbooks', checkbook.id, 'categories'), category);
   }
 
-  async updateCategory(checkbook: Checkbook, category: Category, data: Partial<Category>) {
+  async updateCategory(checkbook: Checkbook, category: Category, data: object) {
     return await updateDoc(doc(collection(this.firestore, 'checkbooks', checkbook.id, 'categories'), category.id), data);
   }
 

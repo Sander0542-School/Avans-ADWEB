@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Checkbook} from "../../../../models/checkbook";
 import {Category} from "../../../../models/category";
-import {TableAction} from "../../checkbook-table/checkbook-table.component";
 
 @Component({
   selector: 'app-category-list',
@@ -23,4 +22,10 @@ export class CategoryListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+}
+
+export type TableAction = {
+  name: string,
+  action: (checkbook: Category) => void,
+  disabled?: (checkbook: Category) => boolean
 }
