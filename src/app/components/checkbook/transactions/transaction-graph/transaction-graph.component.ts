@@ -1,12 +1,13 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Transaction} from "../../../../models/transaction";
+import {Observable, switchMap} from "rxjs";
 
 @Component({
   selector: 'app-transaction-graph',
   templateUrl: './transaction-graph.component.html',
   styleUrls: ['./transaction-graph.component.scss']
 })
-export class TransactionGraphComponent implements OnChanges {
+export class TransactionGraphComponent implements OnInit {
 
   view: any = [700, 400];
   schema: any = {
@@ -14,41 +15,51 @@ export class TransactionGraphComponent implements OnChanges {
   }
 
   @Input()
-  public transactions: Transaction[] = [];
+  public transactions!: Observable<Transaction[]>;
 
-  public transactionGraphData: any[] = [];
+  public graphData!: object[];
 
   constructor() {
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['transactions']) {
-      this.updateGraph();
-    }
+  ngOnInit(): void {
+    this.transactions.subscribe(value => {
+      this.graphData = TransactionGraphComponent.parseTransactions(value);
+    })
   }
 
-  updateGraph(): void {
-    if (this.transactions.length == 0) {
-      this.transactionGraphData = [];
-      return;
+  private static parseTransactions(transactions: Transaction[]): any {
+    if (transactions.length == 0) return [];
+
+    const dateValues = TransactionGraphComponent.getDaysInMonth(transactions[0].datetime.toDate());
+
+    for (let transaction of transactions) {
+      const date = transaction.datetime.toDate().getDate();
+      dateValues.set(date, (dateValues.get(date) ?? 0) + transaction.value);
     }
 
+    return [{
+      name: 'Amount',
+      series: TransactionGraphComponent.calculateMonth(dateValues)
+    }];
+  }
+
+  private static getDaysInMonth(date: Date) {
     const mapData = new Map<number, number>();
 
-    const month = this.getMonth(this.transactions[0].datetime.toDate());
+    const month = TransactionGraphComponent.getMonth(date);
     const nextMonth = new Date(month.getFullYear(), month.getMonth() + 1, 1);
     for (let d = month; d < nextMonth; d.setDate(d.getDate() + 1)) {
       mapData.set(d.getDate(), 0);
     }
 
-    for (let transaction of this.transactions) {
-      const date = transaction.datetime.toDate().getDate();
-      mapData.set(date, (mapData.get(date) ?? 0) + transaction.value);
-    }
+    return mapData;
+  }
 
+  private static calculateMonth(dateValues: Map<number, number>) {
     const series: Object[] = [];
     let start = 0;
-    for (let [date, value] of mapData) {
+    for (const [date, value] of dateValues) {
       start += value;
       series.push({
         name: date,
@@ -56,13 +67,10 @@ export class TransactionGraphComponent implements OnChanges {
       });
     }
 
-    this.transactionGraphData = [{
-      name: 'Amount',
-      series: series
-    }];
+    return series;
   }
 
-  private getMonth(date: Date) {
+  private static getMonth(date: Date) {
     return new Date(date.getFullYear(), date.getMonth(), 1);
   }
 }
