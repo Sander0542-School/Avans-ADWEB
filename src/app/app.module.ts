@@ -53,7 +53,7 @@ import {MatChipsModule} from "@angular/material/chips";
     TransactionCreateComponent,
     CheckbookEditComponent,
     CheckbookTableComponent,
-    TransactionEditComponent
+    TransactionEditComponent,
     CheckbookTableComponent,
     TransactionListComponent,
   ],

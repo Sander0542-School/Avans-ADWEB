@@ -4,5 +4,4 @@ export interface Transaction extends DocumentData {
   id: string;
   value: number;
   datetime: Timestamp;
-  value: number;
 }
