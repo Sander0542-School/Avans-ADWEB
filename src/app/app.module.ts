@@ -36,6 +36,7 @@ import {CheckbookEditComponent} from './components/checkbook/dialogs/checkbook-e
 import {CheckbookTableComponent} from './components/checkbook/checkbook-table/checkbook-table.component';
 import { TransactionListComponent } from './components/checkbook/transactions/transaction-list/transaction-list.component';
 import {MatChipsModule} from "@angular/material/chips";
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import {MatChipsModule} from "@angular/material/chips";
     MatInputModule,
     ReactiveFormsModule,
     MatChipsModule,
+    NgxChartsModule,
   ],
   providers: [
     ScreenTrackingService,
