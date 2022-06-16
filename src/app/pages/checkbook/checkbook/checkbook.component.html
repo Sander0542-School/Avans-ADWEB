@@ -4,4 +4,6 @@
 <button mat-raised-button color="primary" (click)="currentMonth()">{{ month | date:'y - MMMM' }}</button>
 <button mat-raised-button color="primary" (click)="nextMonth()">Next</button>
 
-<p *ngFor="let transaction of transactions">Transaction: {{ transaction.datetime.toDate() | date:'medium' }}</p>
+<div class="grid">
+  <app-transaction-list [transactions]="transactions"></app-transaction-list>
+</div>
