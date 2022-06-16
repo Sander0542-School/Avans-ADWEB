@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {AuthService} from "./auth.service";
 import {Checkbook} from "../models/checkbook";
 import {
   Firestore,
@@ -16,7 +15,6 @@ import {Transaction} from "../models/transaction";
 export class TransactionService {
 
   constructor(
-    private authService: AuthService,
     private firestore: Firestore
   ) {
   }

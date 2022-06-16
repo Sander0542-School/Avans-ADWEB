@@ -1,9 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Checkbook} from "../../../../../models/checkbook";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {CheckbookService} from "../../../../../services/checkbook.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../../../../services/auth.service";
 import {Transaction} from "../../../../../models/transaction";
 import {TransactionService} from "../../../../../services/transaction.service";
 import {Timestamp} from "@angular/fire/firestore";
@@ -23,7 +21,6 @@ export class TransactionCreateComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public checkBookData: Checkbook,
     private transactionService: TransactionService,
     private formBuilder: FormBuilder,
-    private authService: AuthService,
   ) {
     this.editPageForm = this.formBuilder.group({
       value: ['', Validators.required],
