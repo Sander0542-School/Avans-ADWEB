@@ -12,7 +12,6 @@ import {AuthService} from "../../../../services/auth.service";
 })
 export class CheckbookEditComponent {
   editPageForm: FormGroup;
-  pending: boolean = true;
 
   constructor(
     public dialogRef: MatDialogRef<CheckbookEditComponent>,
@@ -26,7 +25,6 @@ export class CheckbookEditComponent {
       description: ['', Validators.required]
     });
     this.editPageForm.patchValue(this.checkBookData);
-
   }
 
   async save() {

@@ -34,7 +34,10 @@ import {MatInputModule} from "@angular/material/input";
 import {CheckbookArchivedComponent} from './pages/checkbook/checkbook-archived/checkbook-archived.component';
 import {CheckbookEditComponent} from './components/checkbook/dialogs/checkbook-edit/checkbook-edit.component';
 import {CheckbookTableComponent} from './components/checkbook/checkbook-table/checkbook-table.component';
-import { TransactionListComponent } from './components/checkbook/transactions/transaction-list/transaction-list.component';
+import {TransactionCreateComponent} from './components/checkbook/transactions/dialogs/transaction-create/transaction-create.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {TransactionEditComponent} from './components/checkbook/transactions/dialogs/transaction-edit/transaction-edit.component';
+import {TransactionListComponent} from './components/checkbook/transactions/transaction-list/transaction-list.component';
 import {MatChipsModule} from "@angular/material/chips";
 
 @NgModule({
@@ -47,6 +50,10 @@ import {MatChipsModule} from "@angular/material/chips";
     CheckbookArchivedComponent,
     CheckbookCreateComponent,
     CheckbookEditComponent,
+    TransactionCreateComponent,
+    CheckbookEditComponent,
+    CheckbookTableComponent,
+    TransactionEditComponent,
     CheckbookTableComponent,
     TransactionListComponent,
   ],
@@ -74,6 +81,7 @@ import {MatChipsModule} from "@angular/material/chips";
     FormsModule,
     MatInputModule,
     ReactiveFormsModule,
+    MatCheckboxModule,
     MatChipsModule,
   ],
   providers: [
