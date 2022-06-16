@@ -3,17 +3,10 @@ import {AuthService} from "./auth.service";
 import {Checkbook} from "../models/checkbook";
 import {
   Firestore,
-  CollectionReference,
-  QuerySnapshot,
-  QueryConstraint,
-  onSnapshot,
-  query,
   collection,
-  where,
   addDoc,
   updateDoc,
   doc,
-  docSnapshots,
 } from "@angular/fire/firestore";
 import {Transaction} from "../models/transaction";
 
