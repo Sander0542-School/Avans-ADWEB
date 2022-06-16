@@ -18,7 +18,7 @@ export class CheckbookListComponent implements OnInit {
   tableActions: TableAction[] = [
     {
       name: 'View',
-      action: (checkbook: Checkbook) => this.router.navigate(['/checkbook', checkbook.id])
+      action: (checkbook: Checkbook) => this.router.navigate(['/checkbooks', checkbook.id])
     },
     {
       name: 'Archive',
