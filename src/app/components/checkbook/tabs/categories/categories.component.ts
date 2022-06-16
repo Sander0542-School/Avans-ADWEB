@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Checkbook} from "../../../../models/checkbook";
 import {orderBy, Unsubscribe, where} from "@angular/fire/firestore";
 import {CategoryService} from "../../../../services/category.service";
@@ -7,20 +7,20 @@ import {MatDialog} from "@angular/material/dialog";
 import {CategoryDialogComponent} from "../../categories/dialogs/category-dialog/category-dialog.component";
 import {Transaction} from "../../../../models/transaction";
 import {TableAction} from "../../categories/category-list/category-list.component";
+import {combineLatest, Observable, switchMap} from "rxjs";
 
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss']
 })
-export class CategoriesComponent implements OnChanges {
+export class CategoriesComponent implements OnInit {
 
   @Input()
-  public checkbook: Checkbook = {} as Checkbook;
+  public checkbook!: Observable<Checkbook>;
+  private checkbookCache!: Checkbook;
 
-  public categories: Category[] = [];
-
-  private categoryUnsubscribe: Unsubscribe | undefined;
+  public categories!: Observable<Category[]>;
 
   public listActions: TableAction[] = [
     {
@@ -39,36 +39,25 @@ export class CategoriesComponent implements OnChanges {
   ) {
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['checkbook']) {
-      this.updateCategories();
-    }
-  }
-
-  private updateCategories() {
-    if (!this.checkbook.id) return;
-
-    this.categoryUnsubscribe?.();
-    this.categoryUnsubscribe = this.categoryService.getCategories(this.checkbook, snapshot => {
-        this.categories = snapshot.docs.map(doc => {
-          const category = doc.data() as Category;
-          category.id = doc.id;
-          return category
-        });
-      },
-    );
+  ngOnInit(): void {
+    this.categories = this.checkbook.pipe(
+      switchMap(checkbook => {
+        this.checkbookCache = checkbook;
+        return this.categoryService.getCategories(checkbook);
+      })
+    )
   }
 
   openCategoryDialog(category?: Category) {
     this.dialog.open(CategoryDialogComponent, {
       data: {
-        checkbook: this.checkbook,
+        checkbook: this.checkbookCache,
         category: category
       },
     });
   }
 
   async deleteCategory(category: Category) {
-    await this.categoryService.deleteCategory(this.checkbook, category);
+    await this.categoryService.deleteCategory(this.checkbookCache, category);
   }
 }

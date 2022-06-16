@@ -39,7 +39,7 @@ export class TransactionCreateComponent implements OnInit {
       datetime: Timestamp.now(),
     } as Transaction;
 
-    await this.transactionService.addTransaction(this.checkBookData, transaction);
+    // await this.transactionService.addTransaction(this.checkBookData, transaction);
     this.dialogRef.close();
   }
 

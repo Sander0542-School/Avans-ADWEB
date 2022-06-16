@@ -31,7 +31,7 @@ export class TransactionEditComponent {
       value: this.editPageForm.value.value,
     }
 
-    await this.transactionService.updateTransaction(this.data.checkbook, this.data.transaction, change)
+    // await this.transactionService.updateTransaction(this.data.checkbook, this.data.transaction, change)
     this.dialogRef.close();
   }
 
