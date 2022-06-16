@@ -11,6 +11,7 @@ import {
 import {
   TransactionEditComponent
 } from "../../../components/checkbook/transactions/dialogs/transaction-edit/transaction-edit.component";
+import {TransactionService} from "../../../services/transaction.service";
 import {TableAction} from "../../../components/checkbook/transactions/transaction-list/transaction-list.component";
 
 
@@ -32,13 +33,18 @@ export class CheckbookComponent implements OnInit {
     {
       name: 'Edit',
       action: (transaction: Transaction) => this.openEditTransactionDialog(this.checkbook, transaction),
+    },
+    {
+      name: 'Delete',
+      action: (transaction: Transaction) => this.deleteTransaction(this.checkbook, transaction),
     }
   ]
 
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    private checkbooksService: CheckbookService
+    private checkbooksService: CheckbookService,
+    private transactionService: TransactionService
   ) {
     this.currentMonth();
   }
@@ -62,7 +68,7 @@ export class CheckbookComponent implements OnInit {
     if (!this.checkbook.id) return;
 
     this.transactionUnsubscribe?.();
-    this.transactionUnsubscribe = this.checkbooksService.getTransactions(this.checkbook.id, snapshot => {
+    this.transactionUnsubscribe = this.transactionService.getTransactions(this.checkbook.id, snapshot => {
         this.transactions = snapshot.docs.map(doc => {
           const transaction = doc.data() as Transaction;
           transaction.id = doc.id;
@@ -102,5 +108,9 @@ export class CheckbookComponent implements OnInit {
       data: {transaction: transaction, checkbook: checkbook},
 
     });
+  }
+
+  async deleteTransaction(checkbook: Checkbook, transaction: Transaction) {
+    await this.transactionService.deleteTransaction(checkbook.id, transaction.id);
   }
 }
