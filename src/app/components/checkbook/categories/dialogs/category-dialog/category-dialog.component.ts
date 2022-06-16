@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {CategoryService} from "../../../../../services/category.service";
 import {Category} from "../../../../../models/category";
-import {Timestamp} from "@angular/fire/firestore";
+import {deleteField, Timestamp} from "@angular/fire/firestore";
 import {Checkbook} from "../../../../../models/checkbook";
 
 @Component({
@@ -26,7 +26,11 @@ export class CategoryDialogComponent {
       endDate: [''],
     });
     if (this.data.category) {
-      this.form.patchValue(this.data.category);
+      this.form.patchValue({
+        name: this.data.category.name,
+        budget: this.data.category.budget,
+        endDate: this.data.category.endDate?.toDate(),
+      });
     }
   }
 
@@ -36,15 +40,19 @@ export class CategoryDialogComponent {
     const category = {
       name: this.form.value.name,
       budget: this.form.value.budget,
-      endDate: undefined
     } as Category;
 
     if (this.form.value.endDate) {
       category.endDate = Timestamp.fromDate(this.form.value.endDate);
     }
 
+    console.log()
+
     if (this.data.category) {
-      await this.categoryService.updateCategory(this.data.checkbook, this.data.category, category);
+      await this.categoryService.updateCategory(this.data.checkbook, this.data.category, {
+        endDate: deleteField(),
+        ...category,
+      });
     } else {
       await this.categoryService.addCategory(this.data.checkbook, category);
     }

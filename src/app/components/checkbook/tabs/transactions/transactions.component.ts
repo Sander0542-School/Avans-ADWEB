@@ -54,7 +54,7 @@ export class TransactionsComponent implements OnChanges {
     if (!this.checkbook.id) return;
 
     this.transactionUnsubscribe?.();
-    this.transactionUnsubscribe = this.transactionService.getTransactions(this.checkbook.id, snapshot => {
+    this.transactionUnsubscribe = this.transactionService.getTransactions(this.checkbook, snapshot => {
         this.transactions = snapshot.docs.map(doc => {
           const transaction = doc.data() as Transaction;
           transaction.id = doc.id;
@@ -97,7 +97,7 @@ export class TransactionsComponent implements OnChanges {
   }
 
   async deleteTransaction(checkbook: Checkbook, transaction: Transaction) {
-    await this.transactionService.deleteTransaction(checkbook, transaction.id);
+    await this.transactionService.deleteTransaction(checkbook, transaction);
   }
 
 }

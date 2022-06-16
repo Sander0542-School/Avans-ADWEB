@@ -1,12 +1,16 @@
 import {Injectable} from '@angular/core';
 import {
-  addDoc,
-  collection,
-  CollectionReference, deleteDoc, doc,
   Firestore,
-  onSnapshot, query,
+  collection,
+  addDoc,
+  updateDoc,
+  doc,
+  deleteDoc,
+  QuerySnapshot,
   QueryConstraint,
-  QuerySnapshot, updateDoc
+  CollectionReference,
+  onSnapshot,
+  query
 } from "@angular/fire/firestore";
 import {Category} from "../models/category";
 import {Checkbook} from "../models/checkbook";
@@ -21,8 +25,8 @@ export class CategoryService {
   ) {
   }
 
-  getCategories(checkbookId: string, callback: (snapshot: QuerySnapshot<Category>) => void, ...queryConstrains: QueryConstraint[]) {
-    const subCollection = collection(this.firestore, `checkbooks`, checkbookId, 'categories') as CollectionReference<Category>;
+  getCategories(checkbook: Checkbook, callback: (snapshot: QuerySnapshot<Category>) => void, ...queryConstrains: QueryConstraint[]) {
+    const subCollection = collection(this.firestore, `checkbooks`, checkbook.id, 'categories') as CollectionReference<Category>;
 
     return onSnapshot(query(subCollection, ...queryConstrains), callback);
   }
@@ -31,7 +35,7 @@ export class CategoryService {
     return await addDoc(collection(this.firestore, 'checkbooks', checkbook.id, 'categories'), category);
   }
 
-  async updateCategory(checkbook: Checkbook, category: Category, data: Partial<Category>) {
+  async updateCategory(checkbook: Checkbook, category: Category, data: object) {
     return await updateDoc(doc(collection(this.firestore, 'checkbooks', checkbook.id, 'categories'), category.id), data);
   }
 

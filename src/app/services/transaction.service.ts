@@ -19,8 +19,8 @@ export class TransactionService {
   ) {
   }
 
-  getTransactions(checkbookId: string, callback: (snapshot: QuerySnapshot<Transaction>) => void, ...queryConstrains: QueryConstraint[]) {
-    const subCollection = collection(this.firestore, `checkbooks`, checkbookId, 'transactions') as CollectionReference<Transaction>;
+  getTransactions(checkbook: Checkbook, callback: (snapshot: QuerySnapshot<Transaction>) => void, ...queryConstrains: QueryConstraint[]) {
+    const subCollection = collection(this.firestore, `checkbooks`, checkbook.id, 'transactions') as CollectionReference<Transaction>;
 
     return onSnapshot(query(subCollection, ...queryConstrains), callback);
   }
@@ -29,11 +29,11 @@ export class TransactionService {
     return await addDoc(collection(this.firestore, 'checkbooks', checkbook.id, 'transactions'), transaction);
   }
 
-  async updateTransaction(checkbook: Checkbook, transactionId: string, data: Partial<Transaction>) {
-    return await updateDoc(doc(collection(this.firestore, 'checkbooks', checkbook.id, 'transactions'), transactionId), data);
+  async updateTransaction(checkbook: Checkbook, transaction: Transaction, data: Partial<Transaction>) {
+    return await updateDoc(doc(collection(this.firestore, 'checkbooks', checkbook.id, 'transactions'), transaction.id), data);
   }
 
-  async deleteTransaction(checkbook: Checkbook, transactionId: string) {
-    return await deleteDoc(doc(collection(this.firestore, 'checkbooks', checkbook.id, 'transactions'), transactionId));
+  async deleteTransaction(checkbook: Checkbook, transaction: Transaction) {
+    return await deleteDoc(doc(collection(this.firestore, 'checkbooks', checkbook.id, 'transactions'), transaction.id));
   }
 }

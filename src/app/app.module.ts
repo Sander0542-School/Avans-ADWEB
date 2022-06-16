@@ -42,6 +42,7 @@ import {MatChipsModule} from "@angular/material/chips";
 import {TransactionsComponent} from './components/checkbook/tabs/transactions/transactions.component';
 import {CategoriesComponent} from './components/checkbook/tabs/categories/categories.component';
 import {MatTabsModule} from "@angular/material/tabs";
+import {CategoryListComponent} from './components/checkbook/categories/category-list/category-list.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {CategoryDialogComponent} from './components/checkbook/categories/dialogs/category-dialog/category-dialog.component';
@@ -64,6 +65,7 @@ import {CategoryDialogComponent} from './components/checkbook/categories/dialogs
     TransactionListComponent,
     TransactionsComponent,
     CategoriesComponent,
+    CategoryListComponent,
     CategoryDialogComponent,
   ],
   imports: [
