@@ -22,6 +22,12 @@ export class CategoriesComponent {
   }
 
   openCategoryDialog(category?: Category) {
+    this.dialog.open(CategoryDialogComponent, {
+      data: {
+        checkbook: this.checkbook,
+        category: category
+      },
+    });
   }
 
   async deleteCategory(category: Category) {
