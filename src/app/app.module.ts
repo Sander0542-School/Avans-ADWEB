@@ -36,6 +36,7 @@ import {CheckbookEditComponent} from './components/checkbook/dialogs/checkbook-e
 import {CheckbookTableComponent} from './components/checkbook/checkbook-table/checkbook-table.component';
 import { TransactionListComponent } from './components/checkbook/transactions/transaction-list/transaction-list.component';
 import {MatChipsModule} from "@angular/material/chips";
+import { TransactionGraphComponent } from './components/checkbook/transactions/transaction-graph/transaction-graph.component';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 @NgModule({
@@ -50,6 +51,7 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
     CheckbookEditComponent,
     CheckbookTableComponent,
     TransactionListComponent,
+    TransactionGraphComponent
   ],
   imports: [
     BrowserModule,
