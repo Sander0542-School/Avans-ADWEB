@@ -42,6 +42,7 @@ import {MatChipsModule} from "@angular/material/chips";
 import {TransactionsComponent} from './components/checkbook/tabs/transactions/transactions.component';
 import {CategoriesComponent} from './components/checkbook/tabs/categories/categories.component';
 import {MatTabsModule} from "@angular/material/tabs";
+import { CategoryListComponent } from './components/checkbook/categories/category-list/category-list.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import {MatTabsModule} from "@angular/material/tabs";
     TransactionListComponent,
     TransactionsComponent,
     CategoriesComponent,
+    CategoryListComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,19 +1,51 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Checkbook} from "../../../../models/checkbook";
+import {Transaction} from "../../../../models/transaction";
+import {orderBy, Unsubscribe, where} from "@angular/fire/firestore";
+import {MatDialog} from "@angular/material/dialog";
+import {ActivatedRoute} from "@angular/router";
+import {TransactionService} from "../../../../services/transaction.service";
+import {CategoryService} from "../../../../services/category.service";
+import {Category} from "../../../../models/category";
 
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss']
 })
-export class CategoriesComponent implements OnInit {
+export class CategoriesComponent implements  OnChanges {
 
   @Input()
   public checkbook: Checkbook = {} as Checkbook;
 
-  constructor() { }
+  public categories: Category[] = [];
 
-  ngOnInit(): void {
+  private categoryUnsubscribe: Unsubscribe | undefined;
+
+  constructor(
+    private categoryService: CategoryService
+  ) {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['checkbook']) {
+      this.updateCategories();
+    }
+  }
+
+
+  private updateCategories() {
+    if (!this.checkbook.id) return;
+
+    this.categoryUnsubscribe?.();
+    this.categoryUnsubscribe = this.categoryService.getCategories(this.checkbook.id, snapshot => {
+        this.categories = snapshot.docs.map(doc => {
+          const category = doc.data() as Category;
+          category.id = doc.id;
+          return category
+        });
+      },
+    );
   }
 
 }
