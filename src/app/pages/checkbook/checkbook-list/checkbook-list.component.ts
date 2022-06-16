@@ -31,8 +31,6 @@ export class CheckbookListComponent implements OnInit {
     }
   ]
 
-  readonly user$ = this.authService.authState;
-
   private documents: Checkbook[] = [];
 
   @ViewChild('modalContent')
@@ -65,7 +63,7 @@ export class CheckbookListComponent implements OnInit {
   }
 
   openEditDialog(checkbook: Checkbook) {
-    const dialogRef = this.dialog.open(CheckbookEditComponent, {
+    this.dialog.open(CheckbookEditComponent, {
       data: checkbook,
     });
   }

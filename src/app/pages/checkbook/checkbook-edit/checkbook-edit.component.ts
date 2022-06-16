@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Checkbook} from "../../../models/checkbook";
 import {CheckbookService} from "../../../services/checkbook.service";
@@ -10,7 +10,7 @@ import {AuthService} from "../../../services/auth.service";
   templateUrl: './checkbook-edit.component.html',
   styleUrls: ['./checkbook-edit.component.scss']
 })
-export class CheckbookEditComponent implements OnInit {
+export class CheckbookEditComponent {
   editPageForm: FormGroup;
   pending: boolean = true;
 
@@ -26,10 +26,6 @@ export class CheckbookEditComponent implements OnInit {
       description: ['', Validators.required]
     });
     this.editPageForm.patchValue(this.checkBookData);
-
-  }
-
-  ngOnInit(): void {
 
   }
 
