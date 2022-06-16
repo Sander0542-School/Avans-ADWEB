@@ -2,7 +2,9 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Checkbook} from "../../../models/checkbook";
 import {CheckbookService} from "../../../services/checkbook.service";
 import {MatDialog} from '@angular/material/dialog';
-import {CheckbookCreateComponent} from "../../../components/checkbook/dialogs/checkbook-create/checkbook-create.component";
+import {
+  CheckbookCreateComponent
+} from "../../../components/checkbook/dialogs/checkbook-create/checkbook-create.component";
 import {where} from "@angular/fire/firestore";
 import {CheckbookEditComponent} from "../../../components/checkbook/dialogs/checkbook-edit/checkbook-edit.component";
 import {AuthService} from "../../../services/auth.service";
@@ -58,7 +60,7 @@ export class CheckbookListComponent implements OnInit {
     return this.documents;
   }
 
-  open() {
+  openCreateDialog() {
     this.dialog.open(CheckbookCreateComponent);
   }
 
