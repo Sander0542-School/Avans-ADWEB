@@ -97,7 +97,7 @@ export class TransactionsComponent implements OnChanges {
   }
 
   async deleteTransaction(checkbook: Checkbook, transaction: Transaction) {
-    await this.transactionService.deleteTransaction(checkbook, transaction);
+    // await this.transactionService.deleteTransaction(checkbook, transaction);
   }
 
 }
