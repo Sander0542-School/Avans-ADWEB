@@ -5,7 +5,7 @@ import {
   collection,
   addDoc,
   updateDoc,
-  doc,
+  doc, deleteDoc,
 } from "@angular/fire/firestore";
 import {Transaction} from "../models/transaction";
 
@@ -25,5 +25,9 @@ export class TransactionService {
 
   async updateTransaction(checkbookId: string, data: Partial<Transaction>, transactionId: string) {
     return await updateDoc(doc(collection(this.firestore, 'checkbooks', checkbookId, 'transactions'), transactionId), data);
+  }
+
+  async deleteTransaction(checkbookId: string, transactionId: string) {
+    return await deleteDoc(doc(collection(this.firestore, 'checkbooks', checkbookId, 'transactions'), transactionId));
   }
 }

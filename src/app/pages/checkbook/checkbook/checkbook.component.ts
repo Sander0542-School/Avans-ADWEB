@@ -11,6 +11,7 @@ import {
 import {
   TransactionEditComponent
 } from "../../../components/checkbook/transactions/dialogs/transaction-edit/transaction-edit.component";
+import {TransactionService} from "../../../services/transaction.service";
 
 
 @Component({
@@ -30,7 +31,8 @@ export class CheckbookComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    private checkbooksService: CheckbookService
+    private checkbooksService: CheckbookService,
+    private transactionService: TransactionService
   ) {
     this.currentMonth();
   }
@@ -94,5 +96,9 @@ export class CheckbookComponent implements OnInit {
       data: {transaction: transaction, checkbook: checkbook},
 
     });
+  }
+
+  async deleteTransaction(checkbook : Checkbook,transaction: Transaction) {
+    await this.transactionService.deleteTransaction(checkbook.id, transaction.id);
   }
 }
