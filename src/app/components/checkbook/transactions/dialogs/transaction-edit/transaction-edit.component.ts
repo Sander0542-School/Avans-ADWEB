@@ -8,7 +8,7 @@ import {TransactionService} from "../../../../../services/transaction.service";
   templateUrl: './transaction-edit.component.html',
   styleUrls: ['./transaction-edit.component.scss']
 })
-export class TransactionEditComponent implements OnInit {
+export class TransactionEditComponent{
   editPageForm: FormGroup;
 
   constructor(
@@ -22,9 +22,6 @@ export class TransactionEditComponent implements OnInit {
 
     });
     this.editPageForm.patchValue(this.data.transaction);
-  }
-
-  ngOnInit(): void {
   }
 
   async save() {
