@@ -33,6 +33,8 @@ import {CheckbookArchivedComponent} from './pages/checkbook/checkbook-archived/c
 import { CheckbookEditComponent } from './pages/checkbook/checkbook-edit/checkbook-edit.component';
 
 import '@angular/common/locales/global/nl';
+import { TransactionCreateComponent } from './components/checkbook/transactions/dialogs/transaction-create/transaction-create.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [
@@ -43,33 +45,35 @@ import '@angular/common/locales/global/nl';
     CheckbookComponent,
     CheckbookArchivedComponent,
     CheckbookCreateComponent,
-    CheckbookEditComponent
+    CheckbookEditComponent,
+    TransactionCreateComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAnalytics(() => getAnalytics()),
-    provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore()),
-    providePerformance(() => getPerformance()),
-    provideRemoteConfig(() => getRemoteConfig()),
-    MatToolbarModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatTableModule,
-    MatSortModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    FormsModule,
-    MatInputModule,
-    ReactiveFormsModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideAnalytics(() => getAnalytics()),
+        provideAuth(() => getAuth()),
+        provideFirestore(() => getFirestore()),
+        providePerformance(() => getPerformance()),
+        provideRemoteConfig(() => getRemoteConfig()),
+        MatToolbarModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatListModule,
+        MatTableModule,
+        MatSortModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        FormsModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatCheckboxModule,
+    ],
   providers: [
     ScreenTrackingService,
     UserTrackingService,
