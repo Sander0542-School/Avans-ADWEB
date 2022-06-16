@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Create new Transaction</h1>
+<form [formGroup]="editPageForm" (ngSubmit)="save()" >
+  <mat-form-field appearance="fill">
+    <mat-label>Value</mat-label>
+    <input matInput type="number" placeholder="Value" formControlName="value">
+  </mat-form-field>
+  <button class="button">Save</button>
+</form>
+

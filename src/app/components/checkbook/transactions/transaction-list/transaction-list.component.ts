@@ -8,11 +8,20 @@ import {Transaction} from "../../../../models/transaction";
 })
 export class TransactionListComponent {
 
-  public readonly displayedColumns: string[] = ['date', 'value'];
+  public readonly displayedColumns: string[] = ['date', 'value', 'actions'];
 
   @Input()
   public transactions: Transaction[] = [];
 
+  @Input()
+  public actions: TableAction[] = [];
+
   constructor() {
   }
+}
+
+
+export type TableAction = {
+  name: string,
+  action: (transaction: Transaction) => void
 }

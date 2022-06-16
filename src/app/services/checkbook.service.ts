@@ -38,12 +38,6 @@ export class CheckbookService {
     return docSnapshots(doc(this.collection, checkbookId));
   }
 
-  getTransactions(checkbookId: string, callback: (snapshot: QuerySnapshot<Transaction>) => void, ...queryConstrains: QueryConstraint[]) {
-    const subCollection = collection(this.firestore, `checkbooks`, checkbookId, 'transactions') as CollectionReference<Transaction>;
-
-    return onSnapshot(query(subCollection, ...queryConstrains), callback);
-  }
-
   async updateCheckbook(checkbookId: string, data: Partial<Checkbook>) {
     return await updateDoc(doc(this.collection, checkbookId), data);
   }
