@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Checkbook} from "../../../models/checkbook";
 import {CheckbookService} from "../../../services/checkbook.service";
 import {where} from "@angular/fire/firestore";
+import {TableAction} from "../../../components/checkbook/checkbook-table/checkbook-table.component";
 
 @Component({
   selector: 'app-checkbook-archived',
@@ -9,7 +10,12 @@ import {where} from "@angular/fire/firestore";
   styleUrls: ['./checkbook-archived.component.scss']
 })
 export class CheckbookArchivedComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'description', 'actions'];
+  tableActions: TableAction[] = [
+    {
+      name: 'Restore',
+      action: (checkbook: Checkbook) => this.restoreCheckbook(checkbook.id)
+    }
+  ];
 
   private documents: Checkbook[] = [];
 

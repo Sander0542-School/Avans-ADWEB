@@ -6,6 +6,8 @@ import {CheckbookCreateComponent} from "../checkbook-create/checkbook-create.com
 import {where} from "@angular/fire/firestore";
 import {CheckbookEditComponent} from "../checkbook-edit/checkbook-edit.component";
 import {AuthService} from "../../../services/auth.service";
+import {Router} from "@angular/router";
+import {TableAction} from "../../../components/checkbook/checkbook-table/checkbook-table.component";
 
 @Component({
   selector: 'app-checkbook-list',
@@ -13,7 +15,21 @@ import {AuthService} from "../../../services/auth.service";
   styleUrls: ['./checkbook-list.component.scss']
 })
 export class CheckbookListComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'description', 'actions'];
+  tableActions: TableAction[] = [
+    {
+      name: 'View',
+      action: (checkbook: Checkbook) => this.router.navigate(['/checkbook', checkbook.id])
+    },
+    {
+      name: 'Archive',
+      action: (checkbook: Checkbook) => this.archiveCheckbook(checkbook.id)
+    },
+    {
+      name: 'Edit',
+      action: (checkbook: Checkbook) => this.openEditDialog(checkbook),
+      disabled: (checkbook: Checkbook) => this.authService.currentUser?.uid !== checkbook.ownerId
+    }
+  ]
 
   readonly user$ = this.authService.authState;
 
@@ -26,6 +42,7 @@ export class CheckbookListComponent implements OnInit {
     public dialog: MatDialog,
     private checkbooksService: CheckbookService,
     private authService: AuthService,
+    private router: Router
   ) {
   }
 
@@ -47,7 +64,7 @@ export class CheckbookListComponent implements OnInit {
     this.dialog.open(CheckbookCreateComponent);
   }
 
-  openEditDialog(checkbook: string) {
+  openEditDialog(checkbook: Checkbook) {
     const dialogRef = this.dialog.open(CheckbookEditComponent, {
       data: checkbook,
     });

@@ -1,6 +1,8 @@
 import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
+import '@angular/common/locales/global/nl';
+
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -23,16 +25,15 @@ import {CheckbookListComponent} from './pages/checkbook/checkbook-list/checkbook
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {CheckbookComponent} from './pages/checkbook/checkbook/checkbook.component';
-import { CheckbookCreateComponent } from './pages/checkbook/checkbook-create/checkbook-create.component';
+import {CheckbookCreateComponent} from './pages/checkbook/checkbook-create/checkbook-create.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {CheckbookArchivedComponent} from './pages/checkbook/checkbook-archived/checkbook-archived.component';
-import { CheckbookEditComponent } from './pages/checkbook/checkbook-edit/checkbook-edit.component';
-
-import '@angular/common/locales/global/nl';
+import {CheckbookEditComponent} from './pages/checkbook/checkbook-edit/checkbook-edit.component';
+import {CheckbookTableComponent} from './components/checkbook/checkbook-table/checkbook-table.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import '@angular/common/locales/global/nl';
     CheckbookComponent,
     CheckbookArchivedComponent,
     CheckbookCreateComponent,
-    CheckbookEditComponent
+    CheckbookEditComponent,
+    CheckbookTableComponent
   ],
   imports: [
     BrowserModule,
