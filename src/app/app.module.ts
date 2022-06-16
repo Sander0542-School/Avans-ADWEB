@@ -39,8 +39,15 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {TransactionEditComponent} from './components/checkbook/transactions/dialogs/transaction-edit/transaction-edit.component';
 import {TransactionListComponent} from './components/checkbook/transactions/transaction-list/transaction-list.component';
 import {MatChipsModule} from "@angular/material/chips";
-import { TransactionGraphComponent } from './components/checkbook/transactions/transaction-graph/transaction-graph.component';
+import {TransactionGraphComponent} from './components/checkbook/transactions/transaction-graph/transaction-graph.component';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
+import {TransactionsComponent} from './components/checkbook/tabs/transactions/transactions.component';
+import {CategoriesComponent} from './components/checkbook/tabs/categories/categories.component';
+import {MatTabsModule} from "@angular/material/tabs";
+import {CategoryListComponent} from './components/checkbook/categories/category-list/category-list.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import {CategoryDialogComponent} from './components/checkbook/categories/dialogs/category-dialog/category-dialog.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +65,11 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
     TransactionEditComponent,
     CheckbookTableComponent,
     TransactionListComponent,
-    TransactionGraphComponent
+    TransactionGraphComponent,
+    TransactionsComponent,
+    CategoriesComponent,
+    CategoryListComponent,
+    CategoryDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,6 +98,9 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
     MatCheckboxModule,
     MatChipsModule,
     NgxChartsModule,
+    MatTabsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [
     ScreenTrackingService,

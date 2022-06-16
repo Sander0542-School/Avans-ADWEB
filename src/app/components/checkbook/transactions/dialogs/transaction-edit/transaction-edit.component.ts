@@ -8,7 +8,7 @@ import {TransactionService} from "../../../../../services/transaction.service";
   templateUrl: './transaction-edit.component.html',
   styleUrls: ['./transaction-edit.component.scss']
 })
-export class TransactionEditComponent{
+export class TransactionEditComponent {
   editPageForm: FormGroup;
 
   constructor(
@@ -31,7 +31,7 @@ export class TransactionEditComponent{
       value: this.editPageForm.value.value,
     }
 
-    await this.transactionService.updateTransaction(this.data.checkbook.id,change, this.data.transaction.id)
+    await this.transactionService.updateTransaction(this.data.checkbook, this.data.transaction, change)
     this.dialogRef.close();
   }
 

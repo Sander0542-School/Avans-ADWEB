@@ -31,7 +31,7 @@ export class TransactionCreateComponent implements OnInit {
     this.pending = false;
   }
 
-  save(): void {
+  async save() {
     if (!this.editPageForm.valid) return;
 
     const transaction = {
@@ -39,7 +39,8 @@ export class TransactionCreateComponent implements OnInit {
       datetime: Timestamp.now(),
     } as Transaction;
 
-    this.transactionService.addTransaction(this.checkBookData, transaction).then(r => this.dialogRef.close());
+    await this.transactionService.addTransaction(this.checkBookData, transaction);
+    this.dialogRef.close();
   }
 
 }
