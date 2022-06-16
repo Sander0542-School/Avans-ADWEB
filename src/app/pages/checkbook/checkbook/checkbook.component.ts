@@ -4,12 +4,11 @@ import {ActivatedRoute} from "@angular/router";
 import {Checkbook} from "../../../models/checkbook";
 import {Transaction} from "../../../models/transaction";
 import {orderBy, Unsubscribe, where} from "@angular/fire/firestore";
-import {CheckbookCreateComponent} from "../checkbook-create/checkbook-create.component";
 import {MatDialog} from "@angular/material/dialog";
 import {
   TransactionCreateComponent
 } from "../../../components/checkbook/transactions/dialogs/transaction-create/transaction-create.component";
-import {CheckbookEditComponent} from "../checkbook-edit/checkbook-edit.component";
+
 
 @Component({
   selector: 'app-checkbook',
