@@ -1,9 +1,9 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {Checkbook} from "../../../models/checkbook";
-import {CheckbookService} from "../../../services/checkbook.service";
+import {Checkbook} from "../../../../models/checkbook";
+import {CheckbookService} from "../../../../services/checkbook.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../../services/auth.service";
+import {AuthService} from "../../../../services/auth.service";
 
 @Component({
   selector: 'app-checkbook-edit',
