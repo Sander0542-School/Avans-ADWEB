@@ -5,7 +5,7 @@ import {
   collection,
   addDoc,
   updateDoc,
-  doc, deleteDoc,
+  doc, deleteDoc, QuerySnapshot, QueryConstraint, CollectionReference, onSnapshot, query,
 } from "@angular/fire/firestore";
 import {Transaction} from "../models/transaction";
 
@@ -17,6 +17,12 @@ export class TransactionService {
   constructor(
     private firestore: Firestore
   ) {
+  }
+
+  getTransactions(checkbookId: string, callback: (snapshot: QuerySnapshot<Transaction>) => void, ...queryConstrains: QueryConstraint[]) {
+    const subCollection = collection(this.firestore, `checkbooks`, checkbookId, 'transactions') as CollectionReference<Transaction>;
+
+    return onSnapshot(query(subCollection, ...queryConstrains), callback);
   }
 
   async addTransaction(checkbook: Checkbook, transaction: Transaction) {

@@ -68,7 +68,7 @@ export class CheckbookComponent implements OnInit {
     if (!this.checkbook.id) return;
 
     this.transactionUnsubscribe?.();
-    this.transactionUnsubscribe = this.checkbooksService.getTransactions(this.checkbook.id, snapshot => {
+    this.transactionUnsubscribe = this.transactionService.getTransactions(this.checkbook.id, snapshot => {
         this.transactions = snapshot.docs.map(doc => {
           const transaction = doc.data() as Transaction;
           transaction.id = doc.id;
