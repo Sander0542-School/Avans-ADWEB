@@ -57,7 +57,7 @@ export class TransactionGraphComponent implements OnChanges {
     }
 
     this.transactionGraphData = [{
-      name: 'Transactions',
+      name: 'Amount',
       series: series
     }];
   }
