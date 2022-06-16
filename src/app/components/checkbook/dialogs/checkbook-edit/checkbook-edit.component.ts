@@ -1,16 +1,16 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {Checkbook} from "../../../models/checkbook";
-import {CheckbookService} from "../../../services/checkbook.service";
+import {Checkbook} from "../../../../models/checkbook";
+import {CheckbookService} from "../../../../services/checkbook.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../../services/auth.service";
+import {AuthService} from "../../../../services/auth.service";
 
 @Component({
   selector: 'app-checkbook-edit',
   templateUrl: './checkbook-edit.component.html',
   styleUrls: ['./checkbook-edit.component.scss']
 })
-export class CheckbookEditComponent implements OnInit {
+export class CheckbookEditComponent {
   editPageForm: FormGroup;
   pending: boolean = true;
 
@@ -29,18 +29,18 @@ export class CheckbookEditComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-
-  }
-
-  save(): void {
+  async save() {
     if (!this.editPageForm.valid) return;
 
-    this.checkBookData.name = this.editPageForm.value.name;
-    this.checkBookData.description = this.editPageForm.value.description;
-
     if (this.checkBookData.ownerId !== this.authService.currentUser?.uid) return;
-    this.checkbooksService.updateCheckbook(this.checkBookData.id, this.checkBookData).then(r => this.dialogRef.close());
+
+    const change = {
+      name: this.editPageForm.value.name,
+      description: this.editPageForm.value.description
+    }
+
+    await this.checkbooksService.updateCheckbook(this.checkBookData.id, change)
+    this.dialogRef.close();
   }
 
 }
