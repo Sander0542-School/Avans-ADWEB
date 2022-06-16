@@ -42,7 +42,10 @@ import {MatChipsModule} from "@angular/material/chips";
 import {TransactionsComponent} from './components/checkbook/tabs/transactions/transactions.component';
 import {CategoriesComponent} from './components/checkbook/tabs/categories/categories.component';
 import {MatTabsModule} from "@angular/material/tabs";
-import { CategoryListComponent } from './components/checkbook/categories/category-list/category-list.component';
+import {CategoryListComponent} from './components/checkbook/categories/category-list/category-list.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import {CategoryDialogComponent} from './components/checkbook/categories/dialogs/category-dialog/category-dialog.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +66,7 @@ import { CategoryListComponent } from './components/checkbook/categories/categor
     TransactionsComponent,
     CategoriesComponent,
     CategoryListComponent,
+    CategoryDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,6 +95,8 @@ import { CategoryListComponent } from './components/checkbook/categories/categor
     MatCheckboxModule,
     MatChipsModule,
     MatTabsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [
     ScreenTrackingService,

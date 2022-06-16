@@ -1,8 +1,10 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {Checkbook} from "../../../../models/checkbook";
 import {orderBy, Unsubscribe, where} from "@angular/fire/firestore";
 import {CategoryService} from "../../../../services/category.service";
 import {Category} from "../../../../models/category";
+import {MatDialog} from "@angular/material/dialog";
+import {CategoryDialogComponent} from "../../categories/dialogs/category-dialog/category-dialog.component";
 
 @Component({
   selector: 'app-categories',
@@ -19,6 +21,7 @@ export class CategoriesComponent implements OnChanges {
   private categoryUnsubscribe: Unsubscribe | undefined;
 
   constructor(
+    public dialog: MatDialog,
     private categoryService: CategoryService
   ) {
   }
@@ -33,7 +36,7 @@ export class CategoriesComponent implements OnChanges {
     if (!this.checkbook.id) return;
 
     this.categoryUnsubscribe?.();
-    this.categoryUnsubscribe = this.categoryService.getCategories(this.checkbook.id, snapshot => {
+    this.categoryUnsubscribe = this.categoryService.getCategories(this.checkbook, snapshot => {
         this.categories = snapshot.docs.map(doc => {
           const category = doc.data() as Category;
           category.id = doc.id;
@@ -43,4 +46,16 @@ export class CategoriesComponent implements OnChanges {
     );
   }
 
+  openCategoryDialog(category?: Category) {
+    this.dialog.open(CategoryDialogComponent, {
+      data: {
+        checkbook: this.checkbook,
+        category: category
+      },
+    });
+  }
+
+  async deleteCategory(category: Category) {
+    await this.categoryService.deleteCategory(this.checkbook, category);
+  }
 }

@@ -1,20 +1,20 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {TransactionsComponent} from './transactions.component';
+import {CategoryDialogComponent} from './category-dialog.component';
 
-describe('TransactionsComponent', () => {
-  let component: TransactionsComponent;
-  let fixture: ComponentFixture<TransactionsComponent>;
+describe('CategoryDialogComponent', () => {
+  let component: CategoryDialogComponent;
+  let fixture: ComponentFixture<CategoryDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TransactionsComponent]
+      declarations: [CategoryDialogComponent]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TransactionsComponent);
+    fixture = TestBed.createComponent(CategoryDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
