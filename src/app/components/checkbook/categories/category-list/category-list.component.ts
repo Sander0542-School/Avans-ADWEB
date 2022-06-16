@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Category} from "../../../../models/category";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-category-list',
@@ -10,7 +11,7 @@ export class CategoryListComponent {
   public readonly columns: string[] = ['name', 'description', 'actions'];
 
   @Input()
-  public categories: Category[] = [];
+  public categories!: Observable<Category[]>;
 
   @Input()
   public actions: TableAction[] = [];

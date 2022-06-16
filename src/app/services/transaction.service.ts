@@ -12,7 +12,9 @@ import {
   CollectionReference,
   onSnapshot,
   query,
-  collectionGroup, where
+  collectionGroup,
+  collectionData,
+  where
 } from "@angular/fire/firestore";
 import {Transaction} from "../models/transaction";
 import {Category} from "../models/category";
@@ -27,10 +29,12 @@ export class TransactionService {
   ) {
   }
 
-  getTransactions(checkbook: Checkbook, callback: (snapshot: QuerySnapshot<Transaction>) => void, ...queryConstrains: QueryConstraint[]) {
+  getTransactions(checkbook: Checkbook, ...queryConstrains: QueryConstraint[]) {
     const subCollection = collectionGroup(this.firestore, 'transactions') as CollectionReference<Transaction>;
 
-    return onSnapshot(query(subCollection, where('checkbookId', '==', checkbook.id), ...queryConstrains), callback);
+    return collectionData(query(subCollection, where('checkbookId', '==', checkbook.id), ...queryConstrains), {
+      idField: 'id'
+    });
   }
 
   async addTransaction(checkbook: Checkbook, category: Category, transaction: Transaction) {

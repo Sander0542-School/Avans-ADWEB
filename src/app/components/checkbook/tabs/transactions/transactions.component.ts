@@ -1,103 +1,58 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {TableAction} from "../../transactions/transaction-list/transaction-list.component";
+import {Component, Input, OnInit} from '@angular/core';
 import {Transaction} from "../../../../models/transaction";
-import {orderBy, Unsubscribe, where} from "@angular/fire/firestore";
+import {orderBy, where} from "@angular/fire/firestore";
 import {Checkbook} from "../../../../models/checkbook";
 import {TransactionService} from "../../../../services/transaction.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ActivatedRoute} from "@angular/router";
-import {TransactionCreateComponent} from "../../transactions/dialogs/transaction-create/transaction-create.component";
-import {TransactionEditComponent} from "../../transactions/dialogs/transaction-edit/transaction-edit.component";
+import {BehaviorSubject, combineLatest, Observable, switchMap} from "rxjs";
 
 @Component({
   selector: 'app-transactions',
   templateUrl: './transactions.component.html',
   styleUrls: ['./transactions.component.scss']
 })
-export class TransactionsComponent implements OnChanges {
+export class TransactionsComponent implements OnInit {
 
   @Input()
-  public checkbook: Checkbook = {} as Checkbook;
+  public checkbook!: Observable<Checkbook>;
+  public transactions!: Observable<Transaction[]>;
 
-  public transactions: Transaction[] = [];
-
-  private transactionUnsubscribe: Unsubscribe | undefined;
-
-  public listActions: TableAction[] = [
-    {
-      name: 'Edit',
-      action: (transaction: Transaction) => this.openEditTransactionDialog(this.checkbook, transaction),
-    },
-    {
-      name: 'Delete',
-      action: (transaction: Transaction) => this.deleteTransaction(this.checkbook, transaction),
-    }
-  ]
-
-  public month!: Date;
+  public month: BehaviorSubject<Date>;
 
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
     private transactionService: TransactionService
   ) {
-    this.currentMonth();
+    this.month = new BehaviorSubject(this.currentMonthStart);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['checkbook']) {
-      this.updateTransactions();
-    }
-  }
-
-  private updateTransactions() {
-    if (!this.checkbook.id) return;
-
-    this.transactionUnsubscribe?.();
-    this.transactionUnsubscribe = this.transactionService.getTransactions(this.checkbook, snapshot => {
-        this.transactions = snapshot.docs.map(doc => {
-          const transaction = doc.data() as Transaction;
-          transaction.id = doc.id;
-          return transaction
-        });
-      },
-      where('datetime', '>=', this.month),
-      where('datetime', '<', new Date(this.month.getFullYear(), this.month.getMonth() + 1, 1)),
-      orderBy('datetime', 'desc')
-    );
+  ngOnInit(): void {
+    this.transactions = combineLatest([this.checkbook, this.month]).pipe(
+      switchMap(([checkbook, date]) => this.transactionService.getTransactions(
+        checkbook,
+        where('datetime', '>=', date),
+        where('datetime', '<', new Date(date.getFullYear(), date.getMonth() + 1, 1)),
+        orderBy('datetime', 'desc')
+      ))
+    )
   }
 
   nextMonth() {
-    this.month = new Date(this.month.getFullYear(), this.month.getMonth() + 1, 1);
-    this.updateTransactions();
+    this.month.next(new Date(this.month.value.getFullYear(), this.month.value.getMonth() + 1, 1));
   }
 
   prevMonth() {
-    this.month = new Date(this.month.getFullYear(), this.month.getMonth() - 1, 1);
-    this.updateTransactions();
+    this.month.next(new Date(this.month.value.getFullYear(), this.month.value.getMonth() - 1, 1));
   }
 
   currentMonth() {
+    this.month.next(this.currentMonthStart);
+  }
+
+  get currentMonthStart() {
     const now = new Date();
-    this.month = new Date(now.getFullYear(), now.getMonth(), 1);
-    this.updateTransactions();
+    return new Date(now.getFullYear(), now.getMonth(), 1);
   }
-
-  openAddTransactionDialog(checkbook: Checkbook) {
-    this.dialog.open(TransactionCreateComponent, {
-      data: checkbook,
-    });
-  }
-
-  openEditTransactionDialog(checkbook: Checkbook, transaction: Transaction) {
-    this.dialog.open(TransactionEditComponent, {
-      data: {transaction: transaction, checkbook: checkbook},
-
-    });
-  }
-
-  async deleteTransaction(checkbook: Checkbook, transaction: Transaction) {
-    // await this.transactionService.deleteTransaction(checkbook, transaction);
-  }
-
 }

@@ -6,11 +6,10 @@ import {
   updateDoc,
   doc,
   deleteDoc,
-  QuerySnapshot,
   QueryConstraint,
   CollectionReference,
-  onSnapshot,
-  query
+  query,
+  collectionData
 } from "@angular/fire/firestore";
 import {Category} from "../models/category";
 import {Checkbook} from "../models/checkbook";
@@ -25,10 +24,12 @@ export class CategoryService {
   ) {
   }
 
-  getCategories(checkbook: Checkbook, callback: (snapshot: QuerySnapshot<Category>) => void, ...queryConstrains: QueryConstraint[]) {
+  getCategories(checkbook: Checkbook, ...queryConstrains: QueryConstraint[]) {
     const subCollection = collection(this.firestore, `checkbooks`, checkbook.id, 'categories') as CollectionReference<Category>;
 
-    return onSnapshot(query(subCollection, ...queryConstrains), callback);
+    return collectionData(query(subCollection, ...queryConstrains), {
+      idField: 'id'
+    });
   }
 
   async addCategory(checkbook: Checkbook, category: Category) {
