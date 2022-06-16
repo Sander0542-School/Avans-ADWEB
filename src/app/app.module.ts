@@ -39,6 +39,12 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {TransactionEditComponent} from './components/checkbook/transactions/dialogs/transaction-edit/transaction-edit.component';
 import {TransactionListComponent} from './components/checkbook/transactions/transaction-list/transaction-list.component';
 import {MatChipsModule} from "@angular/material/chips";
+import {TransactionsComponent} from './components/checkbook/tabs/transactions/transactions.component';
+import {CategoriesComponent} from './components/checkbook/tabs/categories/categories.component';
+import {MatTabsModule} from "@angular/material/tabs";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import {CategoryDialogComponent} from './components/checkbook/categories/dialogs/category-dialog/category-dialog.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +62,9 @@ import {MatChipsModule} from "@angular/material/chips";
     TransactionEditComponent,
     CheckbookTableComponent,
     TransactionListComponent,
+    TransactionsComponent,
+    CategoriesComponent,
+    CategoryDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,6 +92,9 @@ import {MatChipsModule} from "@angular/material/chips";
     ReactiveFormsModule,
     MatCheckboxModule,
     MatChipsModule,
+    MatTabsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [
     ScreenTrackingService,

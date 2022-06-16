@@ -29,11 +29,11 @@ export class TransactionService {
     return await addDoc(collection(this.firestore, 'checkbooks', checkbook.id, 'transactions'), transaction);
   }
 
-  async updateTransaction(checkbookId: string, data: Partial<Transaction>, transactionId: string) {
-    return await updateDoc(doc(collection(this.firestore, 'checkbooks', checkbookId, 'transactions'), transactionId), data);
+  async updateTransaction(checkbook: Checkbook, transactionId: string, data: Partial<Transaction>) {
+    return await updateDoc(doc(collection(this.firestore, 'checkbooks', checkbook.id, 'transactions'), transactionId), data);
   }
 
-  async deleteTransaction(checkbookId: string, transactionId: string) {
-    return await deleteDoc(doc(collection(this.firestore, 'checkbooks', checkbookId, 'transactions'), transactionId));
+  async deleteTransaction(checkbook: Checkbook, transactionId: string) {
+    return await deleteDoc(doc(collection(this.firestore, 'checkbooks', checkbook.id, 'transactions'), transactionId));
   }
 }

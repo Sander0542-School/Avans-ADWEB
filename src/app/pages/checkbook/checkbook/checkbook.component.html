@@ -1,9 +1,10 @@
 <p>{{checkbook.name}}</p>
-<button mat-button (click)="openAddTransactionDialog(checkbook)">Add Transaction</button>
-<button mat-raised-button color="primary" (click)="prevMonth()">Previous</button>
-<button mat-raised-button color="primary" (click)="currentMonth()">{{ month | date:'y - MMMM' }}</button>
-<button mat-raised-button color="primary" (click)="nextMonth()">Next</button>
 
-<div class="grid">
-  <app-transaction-list [actions]="listActions" [transactions]="transactions"></app-transaction-list>
-</div>
+<mat-tab-group>
+  <mat-tab label="Transactions">
+    <app-transactions [checkbook]="checkbook"></app-transactions>
+  </mat-tab>
+  <mat-tab label="Categories">
+    <app-categories [checkbook]="checkbook"></app-categories>
+  </mat-tab>
+</mat-tab-group>
