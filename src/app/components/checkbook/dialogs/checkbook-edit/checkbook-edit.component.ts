@@ -29,14 +29,18 @@ export class CheckbookEditComponent {
 
   }
 
-  save(): void {
+  async save() {
     if (!this.editPageForm.valid) return;
 
-    this.checkBookData.name = this.editPageForm.value.name;
-    this.checkBookData.description = this.editPageForm.value.description;
-
     if (this.checkBookData.ownerId !== this.authService.currentUser?.uid) return;
-    this.checkbooksService.updateCheckbook(this.checkBookData.id, this.checkBookData).then(r => this.dialogRef.close());
+
+    const change = {
+      name: this.editPageForm.value.name,
+      description: this.editPageForm.value.description
+    }
+
+    await this.checkbooksService.updateCheckbook(this.checkBookData.id, change)
+    this.dialogRef.close();
   }
 
 }
