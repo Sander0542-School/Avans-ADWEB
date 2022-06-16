@@ -1,10 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Checkbook} from "../../../../models/checkbook";
-import {Transaction} from "../../../../models/transaction";
 import {orderBy, Unsubscribe, where} from "@angular/fire/firestore";
-import {MatDialog} from "@angular/material/dialog";
-import {ActivatedRoute} from "@angular/router";
-import {TransactionService} from "../../../../services/transaction.service";
 import {CategoryService} from "../../../../services/category.service";
 import {Category} from "../../../../models/category";
 
@@ -13,7 +9,7 @@ import {Category} from "../../../../models/category";
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss']
 })
-export class CategoriesComponent implements  OnChanges {
+export class CategoriesComponent implements OnChanges {
 
   @Input()
   public checkbook: Checkbook = {} as Checkbook;
@@ -32,7 +28,6 @@ export class CategoriesComponent implements  OnChanges {
       this.updateCategories();
     }
   }
-
 
   private updateCategories() {
     if (!this.checkbook.id) return;
