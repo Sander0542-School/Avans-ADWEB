@@ -31,4 +31,8 @@ export class TransactionService {
   async addTransaction(checkbook: Checkbook, transaction: Transaction) {
     return await addDoc(collection(this.firestore, 'checkbooks', checkbook.id, 'transactions'), transaction);
   }
+
+  async updateTransaction(checkbookId: string, data: Partial<Transaction>, transactionId: string) {
+    return await updateDoc(doc(collection(this.firestore, 'checkbooks', checkbookId, 'transactions'), transactionId), data);
+  }
 }

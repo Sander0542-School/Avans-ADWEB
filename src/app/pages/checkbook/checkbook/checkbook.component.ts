@@ -8,6 +8,9 @@ import {MatDialog} from "@angular/material/dialog";
 import {
   TransactionCreateComponent
 } from "../../../components/checkbook/transactions/dialogs/transaction-create/transaction-create.component";
+import {
+  TransactionEditComponent
+} from "../../../components/checkbook/transactions/dialogs/transaction-edit/transaction-edit.component";
 
 
 @Component({
@@ -83,6 +86,13 @@ export class CheckbookComponent implements OnInit {
   openAddTransactionDialog(checkbook: Checkbook) {
     this.dialog.open(TransactionCreateComponent, {
       data: checkbook,
+    });
+  }
+
+  openEditTransactionDialog(checkbook : Checkbook,transaction: Transaction) {
+    this.dialog.open(TransactionEditComponent, {
+      data: {transaction: transaction, checkbook: checkbook},
+
     });
   }
 }

@@ -38,6 +38,7 @@ import {
   TransactionCreateComponent
 } from './components/checkbook/transactions/dialogs/transaction-create/transaction-create.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import { TransactionEditComponent } from './components/checkbook/transactions/dialogs/transaction-edit/transaction-edit.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     CheckbookEditComponent,
     TransactionCreateComponent,
     CheckbookEditComponent,
-    CheckbookTableComponent
+    CheckbookTableComponent,
+    TransactionEditComponent
   ],
   imports: [
     BrowserModule,
