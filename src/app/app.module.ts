@@ -40,6 +40,7 @@ import {TransactionEditComponent} from './components/checkbook/transactions/dial
 import {TransactionListComponent} from './components/checkbook/transactions/transaction-list/transaction-list.component';
 import {MatChipsModule} from "@angular/material/chips";
 import {TransactionsComponent} from './components/checkbook/tabs/transactions/transactions.component';
+import {CategoriesComponent} from './components/checkbook/tabs/categories/categories.component';
 import {MatTabsModule} from "@angular/material/tabs";
 
 @NgModule({
@@ -59,6 +60,7 @@ import {MatTabsModule} from "@angular/material/tabs";
     CheckbookTableComponent,
     TransactionListComponent,
     TransactionsComponent,
+    CategoriesComponent,
   ],
   imports: [
     BrowserModule,
