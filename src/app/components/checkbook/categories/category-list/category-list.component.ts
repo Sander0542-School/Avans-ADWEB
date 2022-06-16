@@ -1,5 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Checkbook} from "../../../../models/checkbook";
+import {Component, Input} from '@angular/core';
 import {Category} from "../../../../models/category";
 
 @Component({
@@ -7,8 +6,7 @@ import {Category} from "../../../../models/category";
   templateUrl: './category-list.component.html',
   styleUrls: ['./category-list.component.scss']
 })
-export class CategoryListComponent implements OnInit {
-
+export class CategoryListComponent {
   public readonly columns: string[] = ['name', 'description', 'actions'];
 
   @Input()
@@ -17,11 +15,8 @@ export class CategoryListComponent implements OnInit {
   @Input()
   public actions: TableAction[] = [];
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor() {
   }
-
 }
 
 export type TableAction = {
