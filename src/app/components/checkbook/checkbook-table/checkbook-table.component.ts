@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Checkbook} from "../../../models/checkbook";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-checkbook-table',
@@ -11,7 +12,7 @@ export class CheckbookTableComponent {
   public readonly columns: string[] = ['name', 'description', 'actions'];
 
   @Input()
-  public checkbooks: Checkbook[] = [];
+  public checkbooks!: Observable<Checkbook[]>;
 
   @Input()
   public actions: TableAction[] = [];

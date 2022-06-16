@@ -10,6 +10,7 @@ import {CheckbookEditComponent} from "../../../components/checkbook/dialogs/chec
 import {AuthService} from "../../../services/auth.service";
 import {Router} from "@angular/router";
 import {TableAction} from "../../../components/checkbook/checkbook-table/checkbook-table.component";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-checkbook-list',
@@ -33,7 +34,7 @@ export class CheckbookListComponent implements OnInit {
     }
   ]
 
-  private documents: Checkbook[] = [];
+  public checkbooks!: Observable<Checkbook[]>;
 
   @ViewChild('modalContent')
   modalContent: ElementRef | undefined;
@@ -47,17 +48,7 @@ export class CheckbookListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.checkbooksService.getCheckbooks(snapshot => {
-      this.documents = snapshot.docs.map(doc => {
-        const checkbook = doc.data() as Checkbook;
-        checkbook.id = doc.id;
-        return checkbook
-      });
-    }, where('archived', '==', false));
-  }
-
-  get checkbooks() {
-    return this.documents;
+    this.checkbooks = this.checkbooksService.getCheckbooks(where('archived', '==', false));
   }
 
   openCreateDialog() {

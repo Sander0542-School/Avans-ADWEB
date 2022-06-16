@@ -3,6 +3,7 @@ import {Checkbook} from "../../../models/checkbook";
 import {CheckbookService} from "../../../services/checkbook.service";
 import {where} from "@angular/fire/firestore";
 import {TableAction} from "../../../components/checkbook/checkbook-table/checkbook-table.component";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-checkbook-archived',
@@ -17,7 +18,7 @@ export class CheckbookArchivedComponent implements OnInit {
     }
   ];
 
-  private documents: Checkbook[] = [];
+  public checkbooks!: Observable<Checkbook[]>;
 
   constructor(
     private checkbooksService: CheckbookService
@@ -25,17 +26,7 @@ export class CheckbookArchivedComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.checkbooksService.getCheckbooks(snapshot => {
-      this.documents = snapshot.docs.map(doc => {
-        const checkbook = doc.data() as Checkbook;
-        checkbook.id = doc.id;
-        return checkbook
-      });
-    }, where('archived', '==', true));
-  }
-
-  get checkbooks() {
-    return this.documents;
+    this.checkbooks = this.checkbooksService.getCheckbooks(where('archived', '==', true));
   }
 
   async restoreCheckbook(checkbookId: string) {

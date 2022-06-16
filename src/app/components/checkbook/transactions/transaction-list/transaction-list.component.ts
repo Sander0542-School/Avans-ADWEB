@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Transaction} from "../../../../models/transaction";
+import {empty, Observable} from "rxjs";
 
 @Component({
   selector: 'app-transaction-list',
@@ -8,10 +9,10 @@ import {Transaction} from "../../../../models/transaction";
 })
 export class TransactionListComponent {
 
-  public readonly displayedColumns: string[] = ['date', 'value', 'actions'];
+  public readonly displayedColumns: string[] = ['date', 'value'];
 
   @Input()
-  public transactions: Transaction[] = [];
+  public transactions: Observable<Transaction[]> = new Observable<Transaction[]>();
 
   @Input()
   public actions: TableAction[] = [];

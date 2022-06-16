@@ -1,4 +1,4 @@
-<p>{{checkbook.name}}</p>
+<p>{{ (checkbook | async)?.name }}</p>
 
 <mat-tab-group>
   <mat-tab label="Transactions">
