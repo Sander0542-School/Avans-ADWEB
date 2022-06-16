@@ -31,7 +31,7 @@ export class CheckbookCreateComponent implements OnInit {
   }
 
 
-  save(): void {
+  async save() {
     if (!this.editPageForm.valid) return;
 
     const checkbook = {
@@ -42,7 +42,8 @@ export class CheckbookCreateComponent implements OnInit {
       archived: false,
     } as Checkbook;
 
-    this.checkbooksService.addCheckbook(checkbook).then(r => this.dialogRef.close());
+    await this.checkbooksService.addCheckbook(checkbook);
+    this.dialogRef.close();
   }
 
 }
