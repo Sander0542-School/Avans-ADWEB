@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Transaction} from "../../../../models/transaction";
-import {empty, Observable} from "rxjs";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-transaction-list',
