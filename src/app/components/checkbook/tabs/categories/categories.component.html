@@ -1,6 +1,7 @@
-<button mat-raised-button color="primary" (click)="openCategoryDialog()">Add Category</button>
+<button mat-raised-button color="primary" (click)="createCategory()">Add Category</button>
 
 <div class="grid">
-  <app-category-list [categories]="categories" [actions]="listActions"></app-category-list>
-  <app-category-transactions [checkbook]="checkbook" [category]="selectedCategory"></app-category-transactions>
+  <ng-container *ngFor="let category of categories | async">
+    <app-category-transactions [checkbook]="checkbook | async" [category]="category"></app-category-transactions>
+  </ng-container>
 </div>
