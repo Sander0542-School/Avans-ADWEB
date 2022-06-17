@@ -1,6 +1,11 @@
 import {Component, Input} from '@angular/core';
 import {Transaction} from "../../../../models/transaction";
-import {empty, Observable} from "rxjs";
+import {empty, Observable, switchMap} from "rxjs";
+import {Checkbook} from "../../../../models/checkbook";
+import {Category} from "../../../../models/category";
+import {CategoryService} from "../../../../services/category.service";
+import {MatDialog} from "@angular/material/dialog";
+import {TransactionService} from "../../../../services/transaction.service";
 
 @Component({
   selector: 'app-transaction-list',
@@ -12,12 +17,17 @@ export class TransactionListComponent {
   public readonly displayedColumns: string[] = ['date', 'value'];
 
   @Input()
-  public transactions: Observable<Transaction[]> = new Observable<Transaction[]>();
+  public transactions!: Observable<Transaction[]>;
 
   @Input()
   public actions: TableAction[] = [];
 
-  constructor() {
+  constructor(
+  ) {
+  }
+
+  ngOnInit(): void {
+
   }
 }
 
