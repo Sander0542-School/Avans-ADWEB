@@ -25,9 +25,9 @@ export class CategoryService {
   }
 
   getCategories(checkbook: Checkbook, ...queryConstrains: QueryConstraint[]) {
-    const subCollection = collection(this.firestore, `checkbooks`, checkbook.id, 'categories') as CollectionReference<Category>;
+    const queryCollection = collection(this.firestore, `checkbooks`, checkbook.id, 'categories') as CollectionReference<Category>;
 
-    return collectionData(query(subCollection, ...queryConstrains), {
+    return collectionData(query(queryCollection, ...queryConstrains), {
       idField: 'id'
     });
   }
