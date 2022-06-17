@@ -46,6 +46,7 @@ import {CategoryListComponent} from './components/checkbook/categories/category-
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {CategoryDialogComponent} from './components/checkbook/categories/dialogs/category-dialog/category-dialog.component';
+import {CategoryTransactionsComponent} from './components/checkbook/categories/category-transactions/category-transactions.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import {CategoryDialogComponent} from './components/checkbook/categories/dialogs
     CategoriesComponent,
     CategoryListComponent,
     CategoryDialogComponent,
+    CategoryTransactionsComponent,
   ],
   imports: [
     BrowserModule,
