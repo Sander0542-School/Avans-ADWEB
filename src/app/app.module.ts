@@ -48,6 +48,7 @@ import {CategoryDialogComponent} from './components/checkbook/categories/dialogs
 import {CategoryTransactionsComponent} from './components/checkbook/categories/category-transactions/category-transactions.component';
 import {MatCardModule} from "@angular/material/card";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import { TransactionsTableComponent } from './components/checkbook/transactions/transactions-table/transactions-table.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
     CategoriesComponent,
     CategoryDialogComponent,
     CategoryTransactionsComponent,
+    TransactionsTableComponent,
   ],
   imports: [
     BrowserModule,
