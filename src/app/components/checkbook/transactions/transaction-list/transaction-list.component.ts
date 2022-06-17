@@ -19,7 +19,8 @@ export class TransactionListComponent {
   public readonly displayedColumns: string[] = ['date', 'value'];
 
   @Input()
-  public checkbook!: Checkbook;
+  public checkbook!: Checkbook | null;
+
   @Input()
   public category!: Category;
 
@@ -50,7 +51,9 @@ export class TransactionListComponent {
   }
 
   async deleteTransaction(transaction: Transaction) {
-    await this.transactionService.deleteTransaction(this.checkbook, this.category, transaction);
+    if (this.checkbook) {
+      await this.transactionService.deleteTransaction(this.checkbook, this.category, transaction);
+    }
   }
 }
 

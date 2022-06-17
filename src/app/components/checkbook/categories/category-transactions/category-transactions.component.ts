@@ -18,7 +18,7 @@ export class CategoryTransactionsComponent implements OnInit {
 
   @Input()
   public checkbook!: Observable<Checkbook>;
-  public checkbookCache!: Checkbook;
+  private checkbookCache!: Checkbook;
 
   @Input()
   public category!: Category
@@ -57,7 +57,7 @@ export class CategoryTransactionsComponent implements OnInit {
   openAddTransactionDialog() {
     if (this.checkbook) {
       this.dialog.open(TransactionCreateComponent, {
-        data: {checkbook: this.checkbook, category: this.category},
+        data: {checkbook: this.checkbookCache, category: this.category},
       });
     }
   }
