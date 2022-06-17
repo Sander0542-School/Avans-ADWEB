@@ -1,7 +1,16 @@
 <mat-card>
   <mat-card-title>{{ category.name }}</mat-card-title>
   <mat-card-subtitle>
-    Budget: {{ category.budget }}
+    Budget: {{ category.budget }}<br/>
+    Current budget: {{ currentBudget }}
+
+    <ng-template [ngIf]="calculateBudgetProgress() >= 90" [ngIfElse]="green">
+      <mat-progress-bar color="warn"  mode="determinate" value="{{calculateBudgetProgress()}}"></mat-progress-bar>
+    </ng-template>
+    <ng-template #green>
+      <mat-progress-bar  mode="determinate" value="{{calculateBudgetProgress()}}"></mat-progress-bar>
+    </ng-template>
+
     <span *ngIf="category.endDate">
       <br/>
       End date: {{ category.endDate.toDate() | date:'mediumDate' }}

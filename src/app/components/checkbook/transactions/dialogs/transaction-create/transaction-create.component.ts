@@ -39,7 +39,7 @@ export class TransactionCreateComponent implements OnInit {
       value: this.editPageForm.value.value,
       datetime: Timestamp.now(),
     } as Transaction;
-    
+
     await this.transactionService.addTransaction(this.data.checkbook, this.data.category, transaction);
     this.dialogRef.close();
   }

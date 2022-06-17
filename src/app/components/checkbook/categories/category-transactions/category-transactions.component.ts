@@ -25,6 +25,8 @@ export class CategoryTransactionsComponent implements OnInit {
 
   public transactions!: Observable<Transaction[]>;
 
+  public currentBudget: number = 0;
+
   constructor(
     private categoryService: CategoryService,
     private transactionService: TransactionService,
@@ -37,6 +39,9 @@ export class CategoryTransactionsComponent implements OnInit {
       this.checkbookCache = checkbook;
       return this.transactionService.getTransactionsByCategory(checkbook, this.category);
     }));
+
+    this.transactions.subscribe(transactions => this.currentBudget = transactions.reduce((budget, transaction) => transaction.value + budget, 0));
+
   }
 
   editCategory() {
@@ -48,14 +53,18 @@ export class CategoryTransactionsComponent implements OnInit {
     });
   }
 
+  calculateBudgetProgress() {
+    return this.currentBudget / this.category.budget * 100;
+  }
+
   async deleteCategory() {
-    if (this.checkbook) {
+    if (this.checkbookCache) {
       await this.categoryService.deleteCategory(this.checkbookCache, this.category);
     }
   }
 
   openAddTransactionDialog() {
-    if (this.checkbook) {
+    if (this.checkbookCache) {
       this.dialog.open(TransactionCreateComponent, {
         data: {checkbook: this.checkbookCache, category: this.category},
       });

@@ -35,10 +35,12 @@ export class CategoriesComponent implements OnInit {
   }
 
   createCategory() {
-    this.dialog.open(CategoryDialogComponent, {
-      data: {
-        checkbook: this.checkbookCache
-      }
-    });
+    if (this.checkbookCache) {
+      this.dialog.open(CategoryDialogComponent, {
+        data: {
+          checkbook: this.checkbookCache
+        }
+      });
+    }
   }
 }
