@@ -47,6 +47,7 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {CategoryDialogComponent} from './components/checkbook/categories/dialogs/category-dialog/category-dialog.component';
 import {CategoryTransactionsComponent} from './components/checkbook/categories/category-transactions/category-transactions.component';
 import {MatCardModule} from "@angular/material/card";
+import { CheckbookDialogComponent } from './components/checkbook/dialogs/checkbook-dialog/checkbook-dialog.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import {MatCardModule} from "@angular/material/card";
     CategoriesComponent,
     CategoryDialogComponent,
     CategoryTransactionsComponent,
+    CheckbookDialogComponent,
   ],
   imports: [
     BrowserModule,

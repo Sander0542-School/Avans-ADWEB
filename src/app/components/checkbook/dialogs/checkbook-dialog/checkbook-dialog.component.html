@@ -1,0 +1,23 @@
+<form [formGroup]="form" (ngSubmit)="save()">
+  <h1 mat-dialog-title>Category</h1>
+  <div mat-dialog-content class="form">
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="description">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Users</mat-label>
+      <mat-select formControlName="users" multiple>
+        <mat-option *ngFor="let user of users | async" [disabled]="user.uid == userId" [value]="user.uid">{{user.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button type="button" mat-button (click)="closeDialog()">Cancel</button>
+    <button mat-button>Save</button>
+  </div>
+</form>
