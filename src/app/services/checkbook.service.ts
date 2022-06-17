@@ -10,7 +10,8 @@ import {
   addDoc,
   updateDoc,
   doc,
-  docData, collectionData,
+  docData,
+  collectionData,
 } from "@angular/fire/firestore";
 import {Checkbook} from "../models/checkbook";
 
