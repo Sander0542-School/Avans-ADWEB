@@ -18,7 +18,7 @@ export class CategoryTransactionsComponent implements OnInit {
 
   @Input()
   public checkbook!: Observable<Checkbook>;
-  private checkbookCache!: Checkbook;
+  public checkbookCache!: Checkbook;
 
   @Input()
   public category!: Category

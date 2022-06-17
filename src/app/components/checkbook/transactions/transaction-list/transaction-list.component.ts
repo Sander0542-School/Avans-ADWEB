@@ -6,6 +6,8 @@ import {Category} from "../../../../models/category";
 import {CategoryService} from "../../../../services/category.service";
 import {MatDialog} from "@angular/material/dialog";
 import {TransactionService} from "../../../../services/transaction.service";
+import {CategoryDialogComponent} from "../../categories/dialogs/category-dialog/category-dialog.component";
+import {TransactionEditComponent} from "../dialogs/transaction-edit/transaction-edit.component";
 
 @Component({
   selector: 'app-transaction-list',
@@ -17,17 +19,38 @@ export class TransactionListComponent {
   public readonly displayedColumns: string[] = ['date', 'value'];
 
   @Input()
+  public checkbook!: Checkbook;
+  @Input()
+  public category!: Category;
+
+  @Input()
   public transactions!: Observable<Transaction[]>;
 
   @Input()
   public actions: TableAction[] = [];
 
   constructor(
+    public dialog: MatDialog,
+    private transactionService: TransactionService,
   ) {
   }
 
   ngOnInit(): void {
 
+  }
+
+  editTransaction(transaction: Transaction) {
+    this.dialog.open(TransactionEditComponent, {
+      data: {
+        transaction: transaction,
+        category: this.category,
+        checkbook: this.checkbook
+      },
+    });
+  }
+
+  deleteTransaction(transaction: Transaction) {
+    this.transactionService.deleteTransaction(this.checkbook, this.category, transaction);
   }
 }
 
