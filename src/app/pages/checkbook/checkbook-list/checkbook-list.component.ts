@@ -25,11 +25,11 @@ export class CheckbookListComponent implements OnInit {
     },
     {
       name: 'Archive',
-      action: (checkbook: Checkbook) => this.archiveCheckbook(checkbook.id)
+      action: (checkbook: Checkbook) => this.archiveCheckbook(checkbook)
     },
     {
       name: 'Edit',
-      action: (checkbook: Checkbook) => this.openEditDialog(checkbook),
+      action: (checkbook: Checkbook) => this.openCheckbookDialog(checkbook),
       disabled: (checkbook: Checkbook) => this.authService.currentUser?.uid !== checkbook.ownerId
     }
   ]
@@ -61,7 +61,7 @@ export class CheckbookListComponent implements OnInit {
     });
   }
 
-  async archiveCheckbook(checkbookId: string) {
-    await this.checkbooksService.updateCheckbook(checkbookId, {archived: true});
+  async archiveCheckbook(checkbook: Checkbook) {
+    await this.checkbooksService.updateCheckbook(checkbook, {archived: true});
   }
 }
