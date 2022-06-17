@@ -1,13 +1,11 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Checkbook} from "../../../../models/checkbook";
-import {orderBy, Unsubscribe, where} from "@angular/fire/firestore";
 import {CategoryService} from "../../../../services/category.service";
 import {Category} from "../../../../models/category";
 import {MatDialog} from "@angular/material/dialog";
 import {CategoryDialogComponent} from "../../categories/dialogs/category-dialog/category-dialog.component";
-import {Transaction} from "../../../../models/transaction";
 import {TableAction} from "../../categories/category-list/category-list.component";
-import {combineLatest, Observable, switchMap} from "rxjs";
+import {BehaviorSubject, Observable, switchMap} from "rxjs";
 
 @Component({
   selector: 'app-categories',
@@ -21,6 +19,7 @@ export class CategoriesComponent implements OnInit {
   private checkbookCache!: Checkbook;
 
   public categories!: Observable<Category[]>;
+  public selectedCategory: BehaviorSubject<Category | undefined>
 
   public listActions: TableAction[] = [
     {
@@ -30,6 +29,10 @@ export class CategoriesComponent implements OnInit {
     {
       name: 'Delete',
       action: (category: Category) => this.deleteCategory(category),
+    },
+    {
+      name: 'Select',
+      action: (category: Category) => this.selectCategory(category),
     }
   ]
 
@@ -37,15 +40,21 @@ export class CategoriesComponent implements OnInit {
     public dialog: MatDialog,
     private categoryService: CategoryService
   ) {
+    this.selectedCategory = new BehaviorSubject<Category | undefined>(undefined);
   }
 
   ngOnInit(): void {
     this.categories = this.checkbook.pipe(
       switchMap(checkbook => {
         this.checkbookCache = checkbook;
+        this.selectedCategory.next(undefined);
         return this.categoryService.getCategories(checkbook);
       })
     )
+  }
+
+  selectCategory(category: Category) {
+    this.selectedCategory.next(category);
   }
 
   openCategoryDialog(category?: Category) {
