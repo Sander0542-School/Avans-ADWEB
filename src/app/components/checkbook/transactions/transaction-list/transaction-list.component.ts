@@ -49,8 +49,8 @@ export class TransactionListComponent {
     });
   }
 
-  deleteTransaction(transaction: Transaction) {
-    this.transactionService.deleteTransaction(this.checkbook, this.category, transaction);
+  async deleteTransaction(transaction: Transaction) {
+    await this.transactionService.deleteTransaction(this.checkbook, this.category, transaction);
   }
 }
 
