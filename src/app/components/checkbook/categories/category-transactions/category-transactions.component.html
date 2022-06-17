@@ -1,1 +1,17 @@
-<p>{{ (category | async)?.name }}</p>
+<mat-card>
+  <mat-card-title>{{ category.name }}</mat-card-title>
+  <mat-card-subtitle>
+    Budget: {{ category.budget }}
+    <span *ngIf="category.endDate">
+      <br/>
+      End date: {{ category.endDate.toDate() | date:'mediumDate' }}
+    </span>
+  </mat-card-subtitle>
+  <mat-card-content>
+    Transactions todo
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="editCategory()">Edit</button>
+    <button mat-button (click)="deleteCategory()">Delete</button>
+  </mat-card-actions>
+</mat-card>

@@ -1,7 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
 import {Category} from "../../../../models/category";
 import {Checkbook} from "../../../../models/checkbook";
+import {CategoryDialogComponent} from "../dialogs/category-dialog/category-dialog.component";
+import {CategoryService} from "../../../../services/category.service";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-category-transactions',
@@ -11,19 +13,33 @@ import {Checkbook} from "../../../../models/checkbook";
 export class CategoryTransactionsComponent implements OnInit {
 
   @Input()
-  public checkbook!: Observable<Checkbook>;
-  private checkbookCache!: Checkbook;
+  public checkbook!: Checkbook | null;
 
   @Input()
-  public category!: Observable<Category | undefined>
-  private categoryCache!: Category | undefined;
+  public category!: Category
 
-  constructor() {
+  constructor(
+    private categoryService: CategoryService,
+    private dialog: MatDialog
+  ) {
   }
 
   ngOnInit(): void {
-    this.checkbook.subscribe(value => this.checkbookCache = value);
-    this.category.subscribe(value => this.categoryCache = value);
+  }
+
+  editCategory() {
+    this.dialog.open(CategoryDialogComponent, {
+      data: {
+        checkbook: this.checkbook,
+        category: this.category
+      },
+    });
+  }
+
+  async deleteCategory() {
+    if (this.checkbook) {
+      await this.categoryService.deleteCategory(this.checkbook, this.category);
+    }
   }
 
 }
