@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Transaction} from "../../../../../models/transaction";
 import {TransactionService} from "../../../../../services/transaction.service";
 import {Timestamp} from "@angular/fire/firestore";
+import {Category} from "../../../../../models/category";
 
 @Component({
   selector: 'app-transaction-create',
@@ -18,7 +19,7 @@ export class TransactionCreateComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<TransactionCreateComponent>,
-    @Inject(MAT_DIALOG_DATA) public checkBookData: Checkbook,
+    @Inject(MAT_DIALOG_DATA) public data: Data,
     private transactionService: TransactionService,
     private formBuilder: FormBuilder,
   ) {
@@ -39,8 +40,12 @@ export class TransactionCreateComponent implements OnInit {
       datetime: Timestamp.now(),
     } as Transaction;
 
-    // await this.transactionService.addTransaction(this.checkBookData, transaction);
+    await this.transactionService.addTransaction(this.data.checkbook, this.data.category, transaction);
     this.dialogRef.close();
   }
 
+}
+type Data = {
+  checkbook: Checkbook,
+  category: Category
 }

@@ -47,7 +47,9 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {CategoryDialogComponent} from './components/checkbook/categories/dialogs/category-dialog/category-dialog.component';
 import {CategoryTransactionsComponent} from './components/checkbook/categories/category-transactions/category-transactions.component';
 import {MatCardModule} from "@angular/material/card";
-import { CheckbookDialogComponent } from './components/checkbook/dialogs/checkbook-dialog/checkbook-dialog.component';
+import {CheckbookDialogComponent} from './components/checkbook/dialogs/checkbook-dialog/checkbook-dialog.component';
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {TransactionsTableComponent} from './components/checkbook/transactions/transactions-table/transactions-table.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +72,7 @@ import { CheckbookDialogComponent } from './components/checkbook/dialogs/checkbo
     CategoryDialogComponent,
     CategoryTransactionsComponent,
     CheckbookDialogComponent,
+    TransactionsTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,6 +104,7 @@ import { CheckbookDialogComponent } from './components/checkbook/dialogs/checkbo
     MatDatepickerModule,
     MatNativeDateModule,
     MatCardModule,
+    MatProgressBarModule,
   ],
   providers: [
     ScreenTrackingService,
