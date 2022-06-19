@@ -5,8 +5,9 @@ import {
   collection,
   setDoc,
   doc,
-  QuerySnapshot,
-  onSnapshot, query
+  query,
+  QueryConstraint,
+  collectionData
 } from "@angular/fire/firestore";
 import {User} from "../models/user";
 import {User as FirebaseUser} from '@angular/fire/auth';
@@ -23,8 +24,10 @@ export class UserService {
     this.collection = collection(firestore, 'users') as CollectionReference<User>;
   }
 
-  getUsers(callback: (snapshot: QuerySnapshot<User>) => void) {
-    onSnapshot(query(this.collection), callback);
+  getUsers(...queryConstrains: QueryConstraint[]) {
+    return collectionData(query(this.collection, ...queryConstrains), {
+      idField: 'uid'
+    });
   }
 
   async updateUser(user: FirebaseUser | null) {

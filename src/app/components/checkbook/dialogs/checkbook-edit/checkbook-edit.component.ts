@@ -37,7 +37,7 @@ export class CheckbookEditComponent {
       description: this.editPageForm.value.description
     }
 
-    await this.checkbooksService.updateCheckbook(this.checkBookData.id, change)
+    await this.checkbooksService.updateCheckbook(this.checkBookData, change)
     this.dialogRef.close();
   }
 

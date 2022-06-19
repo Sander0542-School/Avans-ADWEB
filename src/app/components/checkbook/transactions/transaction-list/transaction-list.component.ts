@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Transaction} from "../../../../models/transaction";
-import {empty, Observable, switchMap} from "rxjs";
+import {Observable, switchMap} from "rxjs";
 import {Checkbook} from "../../../../models/checkbook";
 import {Category} from "../../../../models/category";
 import {CategoryService} from "../../../../services/category.service";

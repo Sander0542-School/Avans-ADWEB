@@ -46,8 +46,6 @@ export class CategoryDialogComponent {
       category.endDate = Timestamp.fromDate(this.form.value.endDate);
     }
 
-    console.log(this.data);
-
     if (this.data.category) {
       await this.categoryService.updateCategory(this.data.checkbook, this.data.category, {
         endDate: deleteField(),

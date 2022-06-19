@@ -3,17 +3,17 @@
   <div mat-dialog-content class="form">
     <mat-form-field appearance="fill">
       <mat-label>Name</mat-label>
-      <input matInput placeholder="Name" formControlName="name">
+      <input matInput formControlName="name">
     </mat-form-field>
     <mat-form-field appearance="fill">
-      <mat-label>Budget</mat-label>
-      <input matInput type="number" placeholder="Budget" formControlName="budget">
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="description">
     </mat-form-field>
     <mat-form-field appearance="fill">
-      <mat-label>End Date</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="endDate">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+      <mat-label>Users</mat-label>
+      <mat-select formControlName="users" multiple>
+        <mat-option *ngFor="let user of users | async" [disabled]="user.uid === userId" [value]="user.uid">{{user.name}}</mat-option>
+      </mat-select>
     </mat-form-field>
   </div>
   <div mat-dialog-actions>

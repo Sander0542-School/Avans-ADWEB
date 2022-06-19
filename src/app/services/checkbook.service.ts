@@ -3,19 +3,17 @@ import {AuthService} from "./auth.service";
 import {
   Firestore,
   CollectionReference,
-  QuerySnapshot,
   QueryConstraint,
-  onSnapshot,
   query,
   collection,
   where,
   addDoc,
   updateDoc,
   doc,
-  docData, collectionData,
+  docData,
+  collectionData,
 } from "@angular/fire/firestore";
 import {Checkbook} from "../models/checkbook";
-import {Transaction} from "../models/transaction";
 
 @Injectable({
   providedIn: 'root'
@@ -42,8 +40,8 @@ export class CheckbookService {
     });
   }
 
-  async updateCheckbook(checkbookId: string, data: Partial<Checkbook>) {
-    return await updateDoc(doc(this.collection, checkbookId), data);
+  async updateCheckbook(checkbook: Checkbook, data: Partial<Checkbook>) {
+    return await updateDoc(doc(this.collection, checkbook.id), data);
   }
 
   async addCheckbook(checkbook: Checkbook) {

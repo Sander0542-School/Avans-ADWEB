@@ -14,7 +14,7 @@ export class CheckbookArchivedComponent implements OnInit {
   tableActions: TableAction[] = [
     {
       name: 'Restore',
-      action: (checkbook: Checkbook) => this.restoreCheckbook(checkbook.id)
+      action: (checkbook: Checkbook) => this.restoreCheckbook(checkbook)
     }
   ];
 
@@ -29,7 +29,7 @@ export class CheckbookArchivedComponent implements OnInit {
     this.checkbooks = this.checkbooksService.getCheckbooks(where('archived', '==', true));
   }
 
-  async restoreCheckbook(checkbookId: string) {
-    await this.checkbooksService.updateCheckbook(checkbookId, {archived: false});
+  async restoreCheckbook(checkbook: Checkbook) {
+    await this.checkbooksService.updateCheckbook(checkbook, {archived: false});
   }
 }
