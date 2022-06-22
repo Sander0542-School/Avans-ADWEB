@@ -30,18 +30,10 @@ export class TransactionsTableComponent {
   @Input()
   public actions: TableAction[] = [];
 
-  constructor(
-    public dialog: MatDialog,
-    private transactionService: TransactionService,
-  ) {
-  }
-
-  ngOnInit(): void {
-
+  constructor() {
   }
 
 }
-
 
 export type TableAction = {
   name: string,
