@@ -13,6 +13,10 @@ import {
 } from "@angular/fire/firestore";
 import {Category} from "../models/category";
 import {Checkbook} from "../models/checkbook";
+import {forkJoin, Observable, switchMap} from "rxjs";
+import {Transaction} from "../models/transaction";
+import {TransactionService} from "./transaction.service";
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +24,8 @@ import {Checkbook} from "../models/checkbook";
 export class CategoryService {
 
   constructor(
-    private firestore: Firestore
+    private firestore: Firestore,
+    private transactionService: TransactionService
   ) {
   }
 
@@ -30,6 +35,13 @@ export class CategoryService {
     return collectionData(query(queryCollection, ...queryConstrains), {
       idField: 'id'
     });
+  }
+
+  getCategoriesWithTransactions(checkbook: Checkbook, ...queryConstrains: QueryConstraint[]) {
+    return this.getCategories(checkbook, ...queryConstrains).pipe(
+      map(categories => categories.map(category => this.transactionService.getTransactionsByCategory(checkbook, category))),
+      switchMap(transactions => forkJoin(transactions))
+    )
   }
 
   async addCategory(checkbook: Checkbook, category: Category) {

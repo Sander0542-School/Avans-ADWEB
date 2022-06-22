@@ -14,6 +14,10 @@ import {
   collectionData,
 } from "@angular/fire/firestore";
 import {Checkbook} from "../models/checkbook";
+import {Observable, switchMap} from "rxjs";
+import {Category} from "../models/category";
+import {Transaction} from "../models/transaction";
+import {TransactionService} from "./transaction.service";
 
 @Injectable({
   providedIn: 'root'

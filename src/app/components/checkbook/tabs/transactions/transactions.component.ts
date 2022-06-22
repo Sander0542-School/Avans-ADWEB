@@ -6,6 +6,8 @@ import {TransactionService} from "../../../../services/transaction.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ActivatedRoute} from "@angular/router";
 import {BehaviorSubject, combineLatest, Observable, switchMap} from "rxjs";
+import {Category} from "../../../../models/category";
+import {CategoryService} from "../../../../services/category.service";
 
 @Component({
   selector: 'app-transactions',
@@ -16,6 +18,7 @@ export class TransactionsComponent implements OnInit {
 
   @Input()
   public checkbook!: Observable<Checkbook>;
+  public categories!: Observable<Category[]>
   public transactions!: Observable<Transaction[]>;
 
   public month: BehaviorSubject<Date>;
@@ -23,14 +26,16 @@ export class TransactionsComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
+    private categoryService: CategoryService,
     private transactionService: TransactionService
   ) {
     this.month = new BehaviorSubject(this.currentMonthStart);
   }
 
   ngOnInit(): void {
+    this.categories = this.checkbook.pipe(switchMap(checkbook => this.categoryService.getCategories(checkbook)))
     this.transactions = combineLatest([this.checkbook, this.month]).pipe(
-      switchMap(([checkbook, date]) => this.transactionService.getTransactions(
+      switchMap(([checkbook, date]) => this.transactionService.getTransactionsWithCategory(
         checkbook,
         where('datetime', '>=', date),
         where('datetime', '<', new Date(date.getFullYear(), date.getMonth() + 1, 1)),
