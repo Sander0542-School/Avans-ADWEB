@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {Observable} from "rxjs";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
@@ -18,11 +18,21 @@ export class NavigationComponent {
 
   readonly user$ = this.authService.authState;
 
+  @ViewChild('loginEmail')
+  private loginEmail!: ElementRef;
+
+  @ViewChild('loginPassword')
+  private loginPassword!: ElementRef;
+
   constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService) {
   }
 
   async login() {
     await this.authService.login();
+  }
+
+  async loginEmailPassword() {
+    await this.authService.loginEmailPassword(this.loginEmail.nativeElement.value, this.loginPassword.nativeElement.value);
   }
 
   async logout() {

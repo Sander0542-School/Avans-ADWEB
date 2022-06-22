@@ -13,7 +13,7 @@
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let checkbook">
       <ng-container *ngFor="let action of actions">
-        <button mat-raised-button color="primary" *ngIf="!action.disabled?.(checkbook)" (click)="action.action(checkbook)">{{ action.name }}</button>
+        <button [class]="action.name.toLowerCase()" mat-raised-button color="primary" *ngIf="!action.disabled?.(checkbook)" (click)="action.action(checkbook)">{{ action.name }}</button>
       </ng-container>
     </td>
   </ng-container>

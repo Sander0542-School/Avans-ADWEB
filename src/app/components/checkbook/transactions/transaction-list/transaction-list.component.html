@@ -1,6 +1,8 @@
 <mat-list>
   <mat-list-item *ngFor="let transaction of transactions | async;">
-    {{ transaction.datetime.toDate() | date:'mediumDate' }} - {{transaction.value}}
+    <span>{{ transaction.datetime.toDate() | date:'mediumDate' }}</span>
+    <span> - </span>
+    <span>{{transaction.value}}</span>
     <button mat-button (click)="editTransaction(transaction)">Edit</button>
     <button mat-button (click)="deleteTransaction(transaction)">Delete</button>
   </mat-list-item>

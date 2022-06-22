@@ -24,13 +24,18 @@
       <span>Checkbook</span>
       <span class="toolbar-spacer"></span>
       <ng-container *ngIf="user$ | async">
-        <button mat-button [mat-menu-trigger-for]="userMenu">{{ (user$ | async)?.displayName }}</button>
+        <button id="userMenu" mat-button [mat-menu-trigger-for]="userMenu">{{ (user$ | async)?.displayName ?? (user$ | async)?.email }}</button>
         <mat-menu #userMenu="matMenu">
-          <button mat-menu-item (click)="logout()">Logout</button>
+          <button id="logout" mat-menu-item (click)="logout()">Logout</button>
         </mat-menu>
       </ng-container>
       <ng-container *ngIf="(user$ | async) === null">
         <button mat-button (click)="login()">Login</button>
+        <div style="display: none">
+          <input id="loginEmail" #loginEmail/>
+          <input id="loginPassword" #loginPassword/>
+          <button id="loginEmailPassword" (click)="loginEmailPassword()">Login</button>
+        </div>
       </ng-container>
     </mat-toolbar>
     <main>
