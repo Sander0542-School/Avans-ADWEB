@@ -34,24 +34,39 @@ import {MatInputModule} from "@angular/material/input";
 import {CheckbookArchivedComponent} from './pages/checkbook/checkbook-archived/checkbook-archived.component';
 import {CheckbookEditComponent} from './components/checkbook/dialogs/checkbook-edit/checkbook-edit.component';
 import {CheckbookTableComponent} from './components/checkbook/checkbook-table/checkbook-table.component';
-import {TransactionCreateComponent} from './components/checkbook/transactions/dialogs/transaction-create/transaction-create.component';
+import {
+  TransactionCreateComponent
+} from './components/checkbook/transactions/dialogs/transaction-create/transaction-create.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
-import {TransactionEditComponent} from './components/checkbook/transactions/dialogs/transaction-edit/transaction-edit.component';
-import {TransactionListComponent} from './components/checkbook/transactions/transaction-list/transaction-list.component';
+import {
+  TransactionEditComponent
+} from './components/checkbook/transactions/dialogs/transaction-edit/transaction-edit.component';
+import {
+  TransactionListComponent
+} from './components/checkbook/transactions/transaction-list/transaction-list.component';
 import {MatChipsModule} from "@angular/material/chips";
-import {TransactionGraphComponent} from './components/checkbook/transactions/transaction-graph/transaction-graph.component';
+import {
+  TransactionGraphComponent
+} from './components/checkbook/transactions/transaction-graph/transaction-graph.component';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {TransactionsComponent} from './components/checkbook/tabs/transactions/transactions.component';
 import {CategoriesComponent} from './components/checkbook/tabs/categories/categories.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
-import {CategoryDialogComponent} from './components/checkbook/categories/dialogs/category-dialog/category-dialog.component';
-import {CategoryTransactionsComponent} from './components/checkbook/categories/category-transactions/category-transactions.component';
+import {
+  CategoryDialogComponent
+} from './components/checkbook/categories/dialogs/category-dialog/category-dialog.component';
+import {
+  CategoryTransactionsComponent
+} from './components/checkbook/categories/category-transactions/category-transactions.component';
 import {MatCardModule} from "@angular/material/card";
 import {CheckbookDialogComponent} from './components/checkbook/dialogs/checkbook-dialog/checkbook-dialog.component';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
-import {TransactionsTableComponent} from './components/checkbook/transactions/transactions-table/transactions-table.component';
+import {
+  TransactionsTableComponent
+} from './components/checkbook/transactions/transactions-table/transactions-table.component';
+import {CategoryGraphComponent} from './components/checkbook/transactions/category-graph/category-graph.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +91,7 @@ import {TransactionsTableComponent} from './components/checkbook/transactions/tr
     CategoryTransactionsComponent,
     CheckbookDialogComponent,
     TransactionsTableComponent,
+    CategoryGraphComponent,
   ],
   imports: [
     BrowserModule,

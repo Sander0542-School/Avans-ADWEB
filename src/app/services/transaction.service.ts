@@ -14,10 +14,11 @@ import {
   query,
   collectionGroup,
   collectionData,
-  where
+  where, collectionSnapshots
 } from "@angular/fire/firestore";
 import {Transaction} from "../models/transaction";
 import {Category} from "../models/category";
+import {BehaviorSubject, switchMap} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,19 @@ export class TransactionService {
     return collectionData(query(queryCollection, ...queryConstrains), {
       idField: 'id'
     });
+  }
+
+  getTransactionsWithCategory(checkbook: Checkbook, ...queryConstrains: QueryConstraint[]) {
+    const queryCollection = collectionGroup(this.firestore, 'transactions') as CollectionReference<Transaction>;
+    const snapshotQuery = query(queryCollection, where('checkbookId', '==', checkbook.id), ...queryConstrains);
+
+    return collectionSnapshots(snapshotQuery).pipe(switchMap(documents => {
+      return new BehaviorSubject(documents.map(document => ({
+        ...document.data(),
+        id: document.id,
+        categoryId: document.ref.parent.parent?.id
+      } as Transaction)))
+    }))
   }
 
   async addTransaction(checkbook: Checkbook, category: Category, transaction: Transaction) {
