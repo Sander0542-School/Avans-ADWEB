@@ -47,7 +47,7 @@ export class CategoryTransactionsComponent implements OnInit {
   editCategory() {
     this.dialog.open(CategoryDialogComponent, {
       data: {
-        checkbook: this.checkbook,
+        checkbook: this.checkbookCache,
         category: this.category
       },
     });

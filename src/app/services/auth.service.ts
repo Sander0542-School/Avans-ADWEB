@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Auth, AuthProvider, authState, GoogleAuthProvider, signInWithPopup, signOut} from "@angular/fire/auth";
+import {Auth, AuthProvider, authState, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, signOut} from "@angular/fire/auth";
 import {UserService} from "./user.service";
 
 @Injectable({
@@ -27,6 +27,10 @@ export class AuthService {
 
   async login() {
     return await this.authLogin(new GoogleAuthProvider())
+  }
+
+  async loginEmailPassword(email: string, password: string) {
+    return await signInWithEmailAndPassword(this.afAuth, email, password);
   }
 
   logout() {
