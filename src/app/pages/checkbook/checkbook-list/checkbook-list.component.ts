@@ -11,6 +11,9 @@ import {AuthService} from "../../../services/auth.service";
 import {Router} from "@angular/router";
 import {TableAction} from "../../../components/checkbook/checkbook-table/checkbook-table.component";
 import {Observable} from "rxjs";
+import {
+  CheckbookDialogComponent
+} from "../../../components/checkbook/dialogs/checkbook-dialog/checkbook-dialog.component";
 
 @Component({
   selector: 'app-checkbook-list',
@@ -25,11 +28,11 @@ export class CheckbookListComponent implements OnInit {
     },
     {
       name: 'Archive',
-      action: (checkbook: Checkbook) => this.archiveCheckbook(checkbook.id)
+      action: (checkbook: Checkbook) => this.archiveCheckbook(checkbook)
     },
     {
       name: 'Edit',
-      action: (checkbook: Checkbook) => this.openEditDialog(checkbook),
+      action: (checkbook: Checkbook) => this.openCheckbookDialog(checkbook),
       disabled: (checkbook: Checkbook) => this.authService.currentUser?.uid !== checkbook.ownerId
     }
   ]
@@ -51,17 +54,15 @@ export class CheckbookListComponent implements OnInit {
     this.checkbooks = this.checkbooksService.getCheckbooks(where('archived', '==', false));
   }
 
-  openCreateDialog() {
-    this.dialog.open(CheckbookCreateComponent);
-  }
-
-  openEditDialog(checkbook: Checkbook) {
-    this.dialog.open(CheckbookEditComponent, {
-      data: checkbook,
+  openCheckbookDialog(checkbook?: Checkbook) {
+    this.dialog.open(CheckbookDialogComponent, {
+      data: {
+        checkbook: checkbook
+      },
     });
   }
 
-  async archiveCheckbook(checkbookId: string) {
-    await this.checkbooksService.updateCheckbook(checkbookId, {archived: true});
+  async archiveCheckbook(checkbook: Checkbook) {
+    await this.checkbooksService.updateCheckbook(checkbook, {archived: true});
   }
 }

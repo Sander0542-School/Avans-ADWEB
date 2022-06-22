@@ -30,15 +30,26 @@ export class TransactionService {
   }
 
   getTransactions(checkbook: Checkbook, ...queryConstrains: QueryConstraint[]) {
-    const subCollection = collectionGroup(this.firestore, 'transactions') as CollectionReference<Transaction>;
+    const queryCollection = collectionGroup(this.firestore, 'transactions') as CollectionReference<Transaction>;
 
-    return collectionData(query(subCollection, where('checkbookId', '==', checkbook.id), ...queryConstrains), {
+    return collectionData(query(queryCollection, where('checkbookId', '==', checkbook.id), ...queryConstrains), {
+      idField: 'id'
+    });
+  }
+
+  getTransactionsByCategory(checkbook: Checkbook, category: Category, ...queryConstrains: QueryConstraint[]) {
+    const queryCollection = collection(this.firestore, 'checkbooks', checkbook.id, 'categories', category.id, 'transactions') as CollectionReference<Transaction>;
+
+    return collectionData(query(queryCollection, ...queryConstrains), {
       idField: 'id'
     });
   }
 
   async addTransaction(checkbook: Checkbook, category: Category, transaction: Transaction) {
-    return await addDoc(collection(this.firestore, 'checkbooks', checkbook.id, 'categories', category.id, 'transactions'), transaction);
+    return await addDoc(collection(this.firestore, 'checkbooks', checkbook.id, 'categories', category.id, 'transactions'), {
+      checkbookId: checkbook.id,
+      ...transaction
+    });
   }
 
   async updateTransaction(checkbook: Checkbook, category: Category, transaction: Transaction, data: Partial<Transaction>) {

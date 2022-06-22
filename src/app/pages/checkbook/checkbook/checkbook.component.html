@@ -1,6 +1,6 @@
 <p>{{ (checkbook | async)?.name }}</p>
 
-<mat-tab-group>
+<mat-tab-group *ngIf="checkbook | async; else notFound">
   <mat-tab label="Transactions">
     <app-transactions [checkbook]="checkbook"></app-transactions>
   </mat-tab>
@@ -8,3 +8,6 @@
     <app-categories [checkbook]="checkbook"></app-categories>
   </mat-tab>
 </mat-tab-group>
+<ng-template #notFound>
+  <h1>Checkbook not found</h1>
+</ng-template>

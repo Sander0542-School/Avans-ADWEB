@@ -3,7 +3,7 @@ import {CheckbookService} from "../../../services/checkbook.service";
 import {ActivatedRoute} from "@angular/router";
 import {Checkbook} from "../../../models/checkbook";
 import {MatDialog} from "@angular/material/dialog";
-import {Observable, switchMap} from "rxjs";
+import {BehaviorSubject, catchError, Observable, of, ReplaySubject, switchMap} from "rxjs";
 
 @Component({
   selector: 'app-checkbook',
@@ -12,16 +12,21 @@ import {Observable, switchMap} from "rxjs";
 })
 export class CheckbookComponent implements OnInit {
 
-  public checkbook!: Observable<Checkbook>;
+  private rawCheckbook!: Observable<Checkbook | null>;
+  public checkbook!: ReplaySubject<Checkbook>;
 
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
     private checkbooksService: CheckbookService
   ) {
+    this.checkbook = new ReplaySubject<Checkbook>();
   }
 
-  ngOnInit(): void {
-    this.checkbook = this.route.params.pipe(switchMap(value => this.checkbooksService.getCheckbook(value['id'])));
+  async ngOnInit() {
+    this.rawCheckbook = this.route.params.pipe(switchMap(value => this.checkbooksService.getCheckbook(value['id'])), catchError(() => {
+      return of(null);
+    }));
+    this.rawCheckbook.subscribe(value => value ? this.checkbook.next(value) : null);
   }
 }

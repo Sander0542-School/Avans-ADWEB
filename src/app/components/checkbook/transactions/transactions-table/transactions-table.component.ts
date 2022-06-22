@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Transaction} from "../../../../models/transaction";
-import {Observable, switchMap} from "rxjs";
+import {empty, Observable, switchMap} from "rxjs";
 import {Checkbook} from "../../../../models/checkbook";
 import {Category} from "../../../../models/category";
 import {CategoryService} from "../../../../services/category.service";
@@ -10,11 +10,11 @@ import {CategoryDialogComponent} from "../../categories/dialogs/category-dialog/
 import {TransactionEditComponent} from "../dialogs/transaction-edit/transaction-edit.component";
 
 @Component({
-  selector: 'app-transaction-list',
-  templateUrl: './transaction-list.component.html',
-  styleUrls: ['./transaction-list.component.scss']
+  selector: 'app-transactions-table',
+  templateUrl: './transactions-table.component.html',
+  styleUrls: ['./transactions-table.component.scss']
 })
-export class TransactionListComponent {
+export class TransactionsTableComponent {
 
   public readonly displayedColumns: string[] = ['date', 'value'];
 
@@ -40,21 +40,6 @@ export class TransactionListComponent {
 
   }
 
-  editTransaction(transaction: Transaction) {
-    this.dialog.open(TransactionEditComponent, {
-      data: {
-        transaction: transaction,
-        category: this.category,
-        checkbook: this.checkbook
-      },
-    });
-  }
-
-  async deleteTransaction(transaction: Transaction) {
-    if (this.checkbook) {
-      await this.transactionService.deleteTransaction(this.checkbook, this.category, transaction);
-    }
-  }
 }
 
 

@@ -44,10 +44,14 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {TransactionsComponent} from './components/checkbook/tabs/transactions/transactions.component';
 import {CategoriesComponent} from './components/checkbook/tabs/categories/categories.component';
 import {MatTabsModule} from "@angular/material/tabs";
-import {CategoryListComponent} from './components/checkbook/categories/category-list/category-list.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {CategoryDialogComponent} from './components/checkbook/categories/dialogs/category-dialog/category-dialog.component';
+import {CategoryTransactionsComponent} from './components/checkbook/categories/category-transactions/category-transactions.component';
+import {MatCardModule} from "@angular/material/card";
+import {CheckbookDialogComponent} from './components/checkbook/dialogs/checkbook-dialog/checkbook-dialog.component';
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {TransactionsTableComponent} from './components/checkbook/transactions/transactions-table/transactions-table.component';
 
 @NgModule({
   declarations: [
@@ -68,8 +72,10 @@ import {CategoryDialogComponent} from './components/checkbook/categories/dialogs
     TransactionGraphComponent,
     TransactionsComponent,
     CategoriesComponent,
-    CategoryListComponent,
     CategoryDialogComponent,
+    CategoryTransactionsComponent,
+    CheckbookDialogComponent,
+    TransactionsTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,6 +107,8 @@ import {CategoryDialogComponent} from './components/checkbook/categories/dialogs
     MatTabsModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatCardModule,
+    MatProgressBarModule,
   ],
   providers: [
     ScreenTrackingService,
